@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="it.didattica.cs.unicam.progettoloretimgc.HelloController"
+      spacing="10" alignment="CENTER">
+    <Label text="Configura il colore dello scooter" />
+
+    <!-- ComboBox per la selezione del colore -->
+    <ComboBox fx:id="colorComboBox" promptText="Seleziona un colore" />
+
+    <!-- Pulsante per configurare il colore -->
+    <Button text="Configura" onAction="#onConfigureButtonClick" />
+
+    <!-- Etichetta per mostrare il risultato -->
+    <Label fx:id="resultLabel" text="Risultato:" />
+</VBox>
