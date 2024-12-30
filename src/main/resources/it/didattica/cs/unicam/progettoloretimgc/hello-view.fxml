@@ -1,17 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<VBox xmlns:fx="http://javafx.com/fxml"
-      fx:controller="it.didattica.cs.unicam.progettoloretimgc.HelloController"
-      spacing="10" alignment="CENTER">
-    <Label text="Configura il colore dello scooter" />
+<?import javafx.scene.Scene?>
 
-    <!-- ComboBox per la selezione del colore -->
-    <ComboBox fx:id="colorComboBox" promptText="Seleziona un colore" />
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.didattica.cs.unicam.progettoloretimgc.HelloController">
+    <!-- Top area -->
+    <top>
+        <VBox spacing="10" alignment="CENTER">
+            <padding>
+                <Insets top="10" right="0" bottom="20" left="0"/>
+            </padding>
+            <Label text="Scooter Configurator" style="-fx-text-fill: #343a40; -fx-font-weight: bold;"/>
+            <Label text="Configura il colore dello scooter" style="-fx-text-fill: #495057;"/>
+        </VBox>
+    </top>
 
-    <!-- Pulsante per configurare il colore -->
-    <Button text="Configura" onAction="#onConfigureButtonClick" />
+    <!-- Center area -->
+    <center>
+        <TabPane fx:id="tabPane">
+            <!-- Prima Tab -->
+            <Tab text="Configurazione">
+                <VBox spacing="10" alignment="CENTER">
+                    <padding>
+                        <Insets top="10" right="10" bottom="10" left="10"/>
+                    </padding>
+                    <!-- ComboBox per la selezione del colore -->
+                    <ComboBox fx:id="colorComboBox" promptText="Seleziona un colore"/>
 
-    <!-- Etichetta per mostrare il risultato -->
-    <Label fx:id="resultLabel" text="Risultato:" />
-</VBox>
+                    <!-- Pulsante per configurare il colore -->
+                    <Button text="Configura" onAction="#onConfigureButtonClick"/>
+
+                    <!-- Etichetta per mostrare il risultato -->
+                    <Label fx:id="resultLabel" text="Risultato:"/>
+                </VBox>
+            </Tab>
+        </TabPane>
+    </center>
+
+    <!-- Right area -->
+    <right>
+        <VBox fx:id="sidebar" spacing="15">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+            <Label text="Sidebar" style="-fx-font-weight: bold;"/>
+            <Button text="Opzione 1" onAction="#onSidebarOption1Click" />
+            <Button text="Opzione 2" onAction="#onSidebarOption2Click"/>
+        </VBox>
+    </right>
+
+    <style>
+        BorderPane {
+        -fx-padding: 15;
+        -fx-background-color: #f8f9fa;
+        }
+    </style>
+</BorderPane>

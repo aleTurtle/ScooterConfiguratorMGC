@@ -38,6 +38,9 @@ public class HelloController {
 
         // Popola il ComboBox con i colori disponibili
         colorComboBox.getItems().addAll("Rosso", "Blu", "Verde", "Giallo", "Nero");
+
+        // Popola la sidebar con configurazioni iniziali
+        populateConfigurationList();
     }
 
     @FXML
@@ -52,10 +55,25 @@ public class HelloController {
         boolean success = configureColor(selectedColor);
         if (success) {
             resultLabel.setText("Colore configurato con successo: " + selectedColor);
+            // Aggiorna la lista delle configurazioni
+            updateConfigurationList("Colore configurato: " + selectedColor);
         } else {
             resultLabel.setText("Errore durante la configurazione.");
         }
     }
+
+    @FXML
+    protected void onSidebarOption1Click() {
+        resultLabel.setText("Hai cliccato su Opzione 1.");
+        updateConfigurationList("Opzione 1 selezionata.");
+    }
+
+    @FXML
+    protected void onSidebarOption2Click() {
+        resultLabel.setText("Hai cliccato su Opzione 2.");
+        updateConfigurationList("Opzione 2 selezionata.");
+    }
+
 
     private void loadOntology() {
         try {
@@ -79,6 +97,22 @@ public class HelloController {
         } catch (Exception e) {
             e.printStackTrace();
             resultLabel.setText("Errore nel caricamento dell'ontologia.");
+        }
+    }
+
+    private void populateConfigurationList() {
+        if (configurationList != null) {
+            configurationList.getItems().clear();
+            configurationList.getItems().addAll(
+                    "Configurazione iniziale: Default",
+                    "Colore: Non configurato"
+            );
+        }
+    }
+
+    private void updateConfigurationList(String newConfiguration) {
+        if (configurationList != null) {
+            configurationList.getItems().add(newConfiguration);
         }
     }
 
