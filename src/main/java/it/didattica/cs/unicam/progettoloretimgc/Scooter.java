@@ -5,28 +5,37 @@ import java.util.List;
 
 public class Scooter {
 
-    private String name;
+    private String modelName;
+    private Colour colour;
     private String color;
     private List<String> accessories;
     private String battery;
     private String engine;
 
-    public Scooter(String name) {
-        this.name = name;
-        this.accessories = new ArrayList<>();
+    private String wheels;
+
+
+    public Scooter(String modelName) {
+        this.modelName = modelName;
+        this.color = "Default Color"; // Colore di default
+        this.engine = "Electric"; // Motore di default
+        this.wheels = "Medium"; // Ruote di default
+        this.battery = "Standard"; // Batteria di default
+       // this.accessories = "None"; // Accessori di default
     }
 
     public String getName() {
-        return name;
+        return modelName;
     }
 
-    public String getColor() {
-        return color;
+    public Colour getColour() {
+        return colour;
     }
 
     public void setColor(String color) {
-        this.color = color;
+        this.color = color;  // Imposta il colore scelto
     }
+
 
     public List<String> getAccessories() {
         return accessories;
@@ -51,4 +60,9 @@ public class Scooter {
     public void setEngine(String engine) {
         this.engine = engine;
     }
+
+    public void setWheels(String wheels) {
+        this.wheels = wheels;
+    }
+
 }

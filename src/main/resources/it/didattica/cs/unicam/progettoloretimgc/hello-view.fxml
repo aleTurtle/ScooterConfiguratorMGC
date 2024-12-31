@@ -1,59 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Alert?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.Scene?>
+<?import javafx.scene.control.Label?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.didattica.cs.unicam.progettoloretimgc.HelloController">
-    <!-- Top area -->
-    <top>
-        <VBox spacing="10" alignment="CENTER">
-            <padding>
-                <Insets top="10" right="0" bottom="20" left="0"/>
-            </padding>
-            <Label text="Scooter Configurator" style="-fx-text-fill: #343a40; -fx-font-weight: bold;"/>
-            <Label text="Configura il colore dello scooter" style="-fx-text-fill: #495057;"/>
-        </VBox>
-    </top>
-
-    <!-- Center area -->
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.didattica.cs.unicam.progettoloretimgc.ScooterConfiguratorController">
+    <!-- Main content -->
     <center>
-        <TabPane fx:id="tabPane">
-            <!-- Prima Tab -->
-            <Tab text="Configurazione">
-                <VBox spacing="10" alignment="CENTER">
-                    <padding>
-                        <Insets top="10" right="10" bottom="10" left="10"/>
-                    </padding>
-                    <!-- ComboBox per la selezione del colore -->
-                    <ComboBox fx:id="colorComboBox" promptText="Seleziona un colore"/>
-
-                    <!-- Pulsante per configurare il colore -->
-                    <Button text="Configura" onAction="#onConfigureButtonClick"/>
-
-                    <!-- Etichetta per mostrare il risultato -->
-                    <Label fx:id="resultLabel" text="Risultato:"/>
-                </VBox>
-            </Tab>
+        <TabPane fx:id="tabPane" prefWidth="800" prefHeight="500">
+            <!-- Tabs for each component configuration -->
+            <Tab text="Color" fx:id="colorTab"/>
+            <Tab text="Engine" fx:id="engineTab"/>
+            <Tab text="Wheels" fx:id="wheelsTab"/>
+            <Tab text="Battery" fx:id="batteryTab"/>
+            <Tab text="Accessories" fx:id="accessoriesTab"/>
         </TabPane>
     </center>
 
-    <!-- Right area -->
+    <!-- Sidebar with configuration summary -->
     <right>
-        <VBox fx:id="sidebar" spacing="15">
+        <VBox spacing="10" style="-fx-background-color: #f8f9fa; -fx-border-color: #dee2e6; -fx-border-width: 1;">
             <padding>
-                <Insets top="10" right="10" bottom="10" left="10"/>
+                <Insets top="15" right="15" bottom="15" left="15"/>
             </padding>
-            <Label text="Sidebar" style="-fx-font-weight: bold;"/>
-            <Button text="Opzione 1" onAction="#onSidebarOption1Click" />
-            <Button text="Opzione 2" onAction="#onSidebarOption2Click"/>
+            <Label text="Configuration Summary" style="-fx-font-weight: bold; -fx-font-size: 16;"/>
+            <ListView fx:id="configurationList" prefHeight="400" />
+            <Button text="Finalize Configuration" onAction="#showFinalConfiguration" style="-fx-background-color: #28a745; -fx-text-fill: white;"/>
         </VBox>
     </right>
-
-    <style>
-        BorderPane {
-        -fx-padding: 15;
-        -fx-background-color: #f8f9fa;
-        }
-    </style>
 </BorderPane>
