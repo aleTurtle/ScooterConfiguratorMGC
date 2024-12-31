@@ -1,10 +1,8 @@
 package it.didattica.cs.unicam.progettoloretimgc;
 
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ListView;
-import javafx.scene.control.Tab;
-import javafx.scene.control.ChoiceDialog;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -14,6 +12,9 @@ public class ScooterConfiguratorController {
 
     @FXML
     private ListView<String> configurationList;
+
+    @FXML
+    private ComboBox<String> colorComboBox; // ComboBox per la selezione del colore
 
     @FXML
     private Tab colorTab, engineTab, wheelsTab, batteryTab, accessoriesTab;
@@ -28,23 +29,29 @@ public class ScooterConfiguratorController {
 
     // Metodo per configurare il colore
     @FXML
-    private void configureColor() {
+    private void initialize() {
+        // Impostare la lista dei colori nel ComboBox
         List<String> colors = List.of("Red", "Blue", "Green", "Yellow", "Black");
-        ChoiceDialog<String> colorDialog = new ChoiceDialog<>(colors.get(0), colors);
-        colorDialog.setTitle("Color Configuration");
-        colorDialog.setHeaderText("Select the color for your scooter");
-        colorDialog.setContentText("Color:");
+        colorComboBox.setItems(FXCollections.observableArrayList(colors));
+    }
 
-        // Personalizzare il dialogo con un'icona
-        ImageView icon = new ImageView(new Image(getClass().getResourceAsStream("/icons/color.png")));
-        icon.setFitHeight(50);
-        icon.setFitWidth(50);
-        colorDialog.setGraphic(icon);
+    // Metodo per configurare il colore
+    @FXML
+    private void configureColor() {
+        // Ottieni il colore selezionato dal ComboBox
+        String selectedColor = colorComboBox.getValue();
 
-        colorDialog.showAndWait().ifPresent(selectedColor -> {
+        if (selectedColor != null) {
             scooter.setColor(selectedColor);
             updateConfigurationList("Color", selectedColor);
-        });
+        } else {
+            // In caso non sia selezionato un colore
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning");
+            alert.setHeaderText("No Color Selected");
+            alert.setContentText("Please select a color for the scooter.");
+            alert.showAndWait();
+        }
     }
 
     // Metodo per configurare il motore

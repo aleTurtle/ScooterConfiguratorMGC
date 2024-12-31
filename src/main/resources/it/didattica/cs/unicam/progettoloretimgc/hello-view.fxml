@@ -12,12 +12,23 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 
+<?import javafx.scene.control.ComboBox?>
 <BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.didattica.cs.unicam.progettoloretimgc.ScooterConfiguratorController">
     <!-- Main content -->
     <center>
         <TabPane fx:id="tabPane" prefWidth="800" prefHeight="500">
             <!-- Tabs for each component configuration -->
-            <Tab text="Color" fx:id="colorTab"/>
+            <Tab text="Color" fx:id="colorTab">
+                <content>
+                    <VBox spacing="10" >
+                        <padding>
+                            <Insets top="10" right="10" bottom="10" left="10"/>
+                        </padding>
+                        <Label text="Select Color:" style="-fx-font-weight: bold; -fx-font-size: 14;"/>
+                        <ComboBox fx:id="colorComboBox" onAction="#configureColor" prefWidth="200"/>
+                    </VBox>
+                </content>
+            </Tab>
             <Tab text="Engine" fx:id="engineTab"/>
             <Tab text="Wheels" fx:id="wheelsTab"/>
             <Tab text="Battery" fx:id="batteryTab"/>
