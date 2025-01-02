@@ -2,72 +2,33 @@ package it.didattica.cs.unicam.progettoloretimgc;
 
 public class Colour {
 
+    private Scooter scooter;
     private String colourName;
 
-    private Scooter colourOfLaptop;
-
-    /**
-     * Constructs a Colour with the specified laptop and name
-     * @param colourOfLaptop the laptop to which the colour is associated
-     * @param colourName the name of the colour
-     */
-
-    public Colour(Scooter colourOfLaptop, String colourName) {
-        this.colourOfLaptop = colourOfLaptop;
+    public Colour(Scooter scooter, String colourName) {
+        this.scooter = scooter;
         this.colourName = colourName;
     }
 
-    /**
-     * Clones the Colour object
-     * @param scooter the scooter to which the Colour object is associated
-     * @return a new Colour object
-     */
-
-    public Colour clone(Scooter scooter) {
-        return new Colour(scooter, this.colourName);
+    public Scooter getScooter() {
+        return scooter;
     }
 
-    /**
-     * @return the laptop to which the colour is associated
-     */
-
-    public Scooter getColourOfLaptop() {
-        return colourOfLaptop;
+    public void setScooter(Scooter scooter) {
+        this.scooter = scooter;
     }
-
-    /**
-     * sets the laptop to which the colour is associated
-     * @param colourOfLaptop the laptop to which the colour is associated
-     */
-
-    public void setColourOfLaptop(Scooter colourOfLaptop) {
-        this.colourOfLaptop = colourOfLaptop;
-    }
-
-    /**
-     * @return the name of the colour
-     */
 
     public String getColourName() {
         return colourName;
     }
 
-    /**
-     * sets the name of the colour
-     * @param HasColourName the name of the colour
-     */
-
-    public void setColourName(String HasColourName) {
-        this.colourName = HasColourName;
+    public void setColourName(String colourName) {
+        this.colourName = colourName;
     }
 
-    /**
-     * @return the name of the colour
-     */
     @Override
     public String toString() {
         return colourName;
     }
-
 
 }

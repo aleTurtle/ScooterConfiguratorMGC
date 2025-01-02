@@ -13,6 +13,7 @@ import org.apache.jena.ontology.OntModel;
 
 import java.util.List;
 import java.util.Locale;
+import java.util.stream.Collectors;
 
 public class ScooterConfiguratorController {
 
@@ -21,34 +22,22 @@ public class ScooterConfiguratorController {
 
     @FXML
     private ComboBox<String> colorComboBox; // ComboBox per la selezione del colore
+    private QueryService queryService;
 
     @FXML
     private Tab colorTab, engineTab, wheelsTab, batteryTab, accessoriesTab;
 
     // Simulazione di un oggetto Scooter e delle sue configurazioni
-    private Scooter scooter;
-    private QueryService queryService;
+    private Scooter scooter= new Scooter("MyScooter");
 
 
-    public void start(Stage primaryStage) {
-        Locale.setDefault(Locale.ENGLISH);
-        primaryStage.setTitle("Scooter Configurator");
+    // Costruttore per iniettare il QueryService
+    public ScooterConfiguratorController() {
+    }
 
-        // Imposta l'icona della finestra
-       // primaryStage.getIcons().add(new Image("icons/scooter.png"));
-
-        // Percorso del file di ontologia per gli scooter
-        String ontologyFilePath = "ScooterConfiguratorOntology.rdf";
-        OntologyLoader ontologyLoader = new OntologyLoader(ontologyFilePath);
-        OntModel model = ontologyLoader.getOntologyModel();
-
-        if (model != null) {
-            SPARQLQueryExecutor queryExecutor = new SPARQLQueryExecutor(model);
-            queryService = new QueryService(queryExecutor);
-            scooter = new Scooter("MyScooter");
-        } else {
-            System.err.println("Error loading the ontology.");
-        }
+    // Metodo per impostare QueryService
+    public void setQueryService(QueryService queryService) {
+        this.queryService = queryService;
     }
 
 
@@ -63,24 +52,25 @@ public class ScooterConfiguratorController {
     // Metodo per configurare il colore
     @FXML
     private void initialize() {
-        // Impostare la lista dei colori nel ComboBox
-       List<String> colors = List.of("Red", "Blue", "Green", "Yellow", "Black");
-       // List<Colour> colors = queryService.getColourComponents(scooter);
 
-        colorComboBox.setItems(FXCollections.observableArrayList(colors));
+        // Impostare la lista dei colori nel ComboBox
+        // Recupera la lista dei colori tramite il queryService
+        List<Colour> colorComponents = queryService.getColourComponents(scooter);
+
+        // Estrai i nomi dei colori dalla lista di oggetti Colour
+        List<String> colorNames = colorComponents.stream()
+                .map(Colour::getColourName)  // Recupera il nome del colore
+                .collect(Collectors.toList());
+
+        // Controlla se il ComboBox è già popolato
+        if (colorComboBox.getItems().isEmpty()) {
+            colorComboBox.setItems(FXCollections.observableArrayList(colorNames));
+        }
     }
 
     // Metodo per configurare il colore
     @FXML
     private void configureColor() {
-        // Definizione della lista dei colori
-        List<String> colors = List.of("Red", "Blue", "Green", "Yellow", "Black");
-
-        // Controlla se il ComboBox è già popolato
-        if (colorComboBox.getItems().isEmpty()) {
-            colorComboBox.setItems(FXCollections.observableArrayList(colors));
-        }
-
         // Ottieni il colore selezionato dal ComboBox
         String selectedColor = colorComboBox.getValue();
 

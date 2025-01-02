@@ -24,7 +24,7 @@ tasks.withType(JavaCompile) {
 }
 
 application {
-    mainClass = 'it.didattica.cs.unicam.progettoloretimgc.HelloApplication'
+    mainClass = 'it.didattica.cs.unicam.progettoloretimgc.ScooterConfiguratorApplication'
 }
 
 javafx {
@@ -48,6 +48,8 @@ dependencies {
         exclude group: 'com.github.galigator.openllet', module: 'openllet-query'
     }
     implementation 'com.github.galigator.openllet:openllet-jena:2.6.4'
+
+    implementation 'org.slf4j:slf4j-simple:2.0.9'
 
     // Dipendenze per test
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")

@@ -25,17 +25,17 @@ public class QueryService {
         List<Colour> colourList = new ArrayList<>();
 
         String sparqlQuery = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
-                "PREFIX laptop: <http://www.semanticweb.org/leona/ontologies/2024/9/LaptopConfiguratorModellazioneGestioneConoscenza#>" +
+                "PREFIX scooter: <http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#>" +
                 "SELECT ?colour ?name WHERE { " +
-                "?colour rdf:type laptop:Colour . " +
-                "?colour laptop:HasColourName ?name . " +
+                "?colour rdf:type scooter:Colour . " +
+                "?colour scooter:HasColourName ?name . " +
                 "}";
 
         ResultSet results = queryExecutor.executeQuery(sparqlQuery);
         while (results != null && results.hasNext()) {
             QuerySolution solution = results.nextSolution();
             Resource colourResource = solution.getResource("colour");
-            String name = colourResource.getLocalName();
+            String name = solution.getLiteral("name").getString();
             colourList.add(new Colour(scooter, name));
         }
         return colourList;
