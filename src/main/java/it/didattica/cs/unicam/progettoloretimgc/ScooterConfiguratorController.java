@@ -1,12 +1,18 @@
 package it.didattica.cs.unicam.progettoloretimgc;
 
+import it.didattica.cs.unicam.progettoloretimgc.ontology.OntologyLoader;
+import it.didattica.cs.unicam.progettoloretimgc.ontology.QueryService;
+import it.didattica.cs.unicam.progettoloretimgc.ontology.SPARQLQueryExecutor;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
+import org.apache.jena.ontology.OntModel;
 
 import java.util.List;
+import java.util.Locale;
 
 public class ScooterConfiguratorController {
 
@@ -20,24 +26,61 @@ public class ScooterConfiguratorController {
     private Tab colorTab, engineTab, wheelsTab, batteryTab, accessoriesTab;
 
     // Simulazione di un oggetto Scooter e delle sue configurazioni
-    private Scooter scooter = new Scooter("MyScooter");
+    private Scooter scooter;
+    private QueryService queryService;
+
+
+    public void start(Stage primaryStage) {
+        Locale.setDefault(Locale.ENGLISH);
+        primaryStage.setTitle("Scooter Configurator");
+
+        // Imposta l'icona della finestra
+       // primaryStage.getIcons().add(new Image("icons/scooter.png"));
+
+        // Percorso del file di ontologia per gli scooter
+        String ontologyFilePath = "ScooterConfiguratorOntology.rdf";
+        OntologyLoader ontologyLoader = new OntologyLoader(ontologyFilePath);
+        OntModel model = ontologyLoader.getOntologyModel();
+
+        if (model != null) {
+            SPARQLQueryExecutor queryExecutor = new SPARQLQueryExecutor(model);
+            queryService = new QueryService(queryExecutor);
+            scooter = new Scooter("MyScooter");
+        } else {
+            System.err.println("Error loading the ontology.");
+        }
+    }
+
 
     // Metodo per aggiungere un componente alla lista di configurazione
     private void updateConfigurationList(String componentName, String componentValue) {
         configurationList.getItems().add(componentName + ": " + componentValue);
     }
 
+
+
+
     // Metodo per configurare il colore
     @FXML
     private void initialize() {
         // Impostare la lista dei colori nel ComboBox
-        List<String> colors = List.of("Red", "Blue", "Green", "Yellow", "Black");
+       List<String> colors = List.of("Red", "Blue", "Green", "Yellow", "Black");
+       // List<Colour> colors = queryService.getColourComponents(scooter);
+
         colorComboBox.setItems(FXCollections.observableArrayList(colors));
     }
 
     // Metodo per configurare il colore
     @FXML
     private void configureColor() {
+        // Definizione della lista dei colori
+        List<String> colors = List.of("Red", "Blue", "Green", "Yellow", "Black");
+
+        // Controlla se il ComboBox è già popolato
+        if (colorComboBox.getItems().isEmpty()) {
+            colorComboBox.setItems(FXCollections.observableArrayList(colors));
+        }
+
         // Ottieni il colore selezionato dal ComboBox
         String selectedColor = colorComboBox.getValue();
 
@@ -53,6 +96,9 @@ public class ScooterConfiguratorController {
             alert.showAndWait();
         }
     }
+
+
+
 
     // Metodo per configurare il motore
     @FXML
