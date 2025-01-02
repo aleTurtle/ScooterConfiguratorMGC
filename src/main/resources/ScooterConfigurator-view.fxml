@@ -13,7 +13,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ComboBox?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml/1" >
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.didattica.cs.unicam.progettoloretimgc.ScooterViewController" >
     <!-- Main content -->
     <center>
         <TabPane fx:id="tabPane" prefWidth="800" prefHeight="500">
