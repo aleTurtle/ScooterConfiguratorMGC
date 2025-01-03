@@ -214,6 +214,16 @@
 
 
 
+    <!-- http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#HasAccessoryDescription -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#HasAccessoryDescription">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Accessory"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+
+
+
     <!-- http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#HasBatteryCapacity -->
 
     <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#HasBatteryCapacity">
@@ -679,9 +689,6 @@ This property is expressed in km.</rdfs:comment>
 
     <owl:Class rdf:about="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Mirror">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Accessory"/>
-        <rdfs:comment>This class represents a reflective device mounted on the scooter that allows the rider to see behind them for safer driving.
-In italian it&apos;s called &quot;specchietto&quot;.</rdfs:comment>
-        <rdfs:label>Mirror</rdfs:label>
     </owl:Class>
 
 
@@ -969,6 +976,24 @@ In italian, it&apos;s called &quot;bauletto&quot;.</rdfs:comment>
 
 
 
+    <!-- http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Mirror1 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Mirror1">
+        <rdf:type rdf:resource="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Mirror"/>
+        <ScooterConfigurator:HasAccessoryDescription>Left mirror</ScooterConfigurator:HasAccessoryDescription>
+    </owl:NamedIndividual>
+
+
+
+    <!-- http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Mirror2 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Mirror2">
+        <rdf:type rdf:resource="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Mirror"/>
+        <ScooterConfigurator:HasAccessoryDescription>Right mirror</ScooterConfigurator:HasAccessoryDescription>
+    </owl:NamedIndividual>
+
+
+
     <!-- http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Orange -->
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Orange">
@@ -1064,6 +1089,7 @@ In italian, it&apos;s called &quot;bauletto&quot;.</rdfs:comment>
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#TopCase1">
         <rdf:type rdf:resource="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#TopCase"/>
+        <ScooterConfigurator:HasAccessoryDescription>Top Case</ScooterConfigurator:HasAccessoryDescription>
     </owl:NamedIndividual>
 
 
@@ -1088,6 +1114,7 @@ In italian, it&apos;s called &quot;bauletto&quot;.</rdfs:comment>
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Windshield1">
         <rdf:type rdf:resource="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Windshield"/>
+        <ScooterConfigurator:HasAccessoryDescription>Windshield</ScooterConfigurator:HasAccessoryDescription>
     </owl:NamedIndividual>
 </rdf:RDF>
 

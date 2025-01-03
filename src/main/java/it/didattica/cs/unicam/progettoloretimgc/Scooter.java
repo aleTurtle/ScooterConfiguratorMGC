@@ -15,6 +15,7 @@ public class Scooter {
     private String wheels;
     private String fuel;
     private String light;
+    private String winshield;
 
 
     public Scooter(String modelName) {
@@ -69,8 +70,15 @@ public class Scooter {
         this.light= light;
     }
 
+    public void setWinshield(String winshield){
+        this.winshield= winshield;
+    }
+
+
     public void setWheels(String wheels) {
         this.wheels = wheels;
     }
+
+
 
 }

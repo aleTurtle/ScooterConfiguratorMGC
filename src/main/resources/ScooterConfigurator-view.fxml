@@ -27,7 +27,7 @@
                             <Insets top="10" right="10" bottom="10" left="10"/>
                         </padding>
                         <Label text="Select Color:" style="-fx-font-weight: bold; -fx-font-size: 14;"/>
-                        <ComboBox fx:id="colorComboBox" onAction="#configureColor" prefWidth="200"/>
+                        <ComboBox fx:id="colorComboBox" onAction="#handleSelection" prefWidth="200"/>
                     </VBox>
                 </content>
             </Tab>
@@ -43,10 +43,10 @@
                             <Insets top="10" right="10" bottom="10" left="10"/>
                         </padding>
                         <Label text="Select Fuel:" style="-fx-font-weight: bold; -fx-font-size: 14;"/>
-                        <ComboBox fx:id="fuelComboBox" onAction="#configureFuel" prefWidth="200"/>
+                        <ComboBox fx:id="fuelComboBox" onAction="#handleSelection" prefWidth="200"/>
 
                         <Label text="Select Battery:" style="-fx-font-weight: bold; -fx-font-size: 14;"/>
-                        <ComboBox fx:id="batteryComboBox" onAction="#configureBattery" prefWidth="200"/>
+                        <ComboBox fx:id="batteryComboBox" onAction="#handleSelection" prefWidth="200"/>
                     </VBox>
                 </content>
             </Tab>
@@ -58,12 +58,31 @@
                             <Insets top="10" right="10" bottom="10" left="10"/>
                         </padding>
                         <Label text="Select Light:" style="-fx-font-weight: bold; -fx-font-size: 14;"/>
-                        <ComboBox fx:id="lightComboBox" onAction="#configureLight" prefWidth="200"/>
+                        <ComboBox fx:id="lightComboBox" onAction="#handleSelection" prefWidth="200"/>
                     </VBox>
                 </content>
             </Tab>
 
-            <Tab text="Accessories" fx:id="accessoriesTab"/>
+            <Tab text="Accessories" fx:id="accessoriesTab">
+                <content>
+                    <VBox spacing="10">
+                        <padding>
+                            <Insets top="10" right="10" bottom="10" left="10"/>
+                        </padding>
+
+
+
+                        <VBox spacing="10">
+                            <Label text="Select Windshield:" style="-fx-font-weight: bold; -fx-font-size: 14;"/>
+                            <ComboBox fx:id="windshieldComboBox" onAction="#handleSelection" prefWidth="200"/>
+                        </VBox>
+
+
+
+                    </VBox>
+                </content>
+            </Tab>
+
         </TabPane>
     </center>
 

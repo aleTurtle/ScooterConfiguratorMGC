@@ -103,6 +103,27 @@ public class QueryService {
         return batteryList;
     }
 
+    public List<Windshield> getWindshieldComponents(Scooter scooter) {
+        List<Windshield> windshieldList = new ArrayList<>();
+
+        String sparqlQuery = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
+                "PREFIX scooter: <http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#>" +
+                "SELECT ?windshield ?description WHERE { " +
+                "?windshield rdf:type scooter:Windshield . " +
+                "?windshield scooter:HasAccessoryDescription ?description . " +
+                "}";
+
+        ResultSet results = queryExecutor.executeQuery(sparqlQuery);
+        while (results != null && results.hasNext()) {
+            QuerySolution solution = results.nextSolution();
+            Resource fuelResource = solution.getResource("windshield");
+            String description = solution.getLiteral("description").getString();
+            windshieldList.add(new Windshield(scooter, description));
+        }
+        return windshieldList;
+
+    }
+
 /*
     public List<Accessory> getAccessoryComponents(Scooter scooter) {
         List<Accessory> accessoriesList = new ArrayList<>();
