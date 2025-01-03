@@ -13,6 +13,8 @@ public class Scooter {
     private String engine;
 
     private String wheels;
+    private String fuel;
+    private String light;
 
 
     public Scooter(String modelName) {
@@ -35,6 +37,8 @@ public class Scooter {
     public void setColor(String color) {
         this.color = color;  // Imposta il colore scelto
     }
+
+    public void setFuel(String fuel) {this.fuel = fuel;}
 
 
     public List<String> getAccessories() {
@@ -59,6 +63,10 @@ public class Scooter {
 
     public void setEngine(String engine) {
         this.engine = engine;
+    }
+
+    public void setLight(String light){
+        this.light= light;
     }
 
     public void setWheels(String wheels) {

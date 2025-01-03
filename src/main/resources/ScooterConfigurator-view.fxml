@@ -16,8 +16,10 @@
 <BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.didattica.cs.unicam.progettoloretimgc.ScooterViewController" >
     <!-- Main content -->
     <center>
+
         <TabPane fx:id="tabPane" prefWidth="800" prefHeight="500">
-            <!-- Tabs for Colour component configuration -->
+
+            <!-- Tab for Colour component configuration -->
             <Tab text="Color" fx:id="colorTab">
                 <content>
                     <VBox spacing="10" >
@@ -29,9 +31,38 @@
                     </VBox>
                 </content>
             </Tab>
+
             <Tab text="Engine" fx:id="engineTab"/>
             <Tab text="Wheels" fx:id="wheelsTab"/>
-            <Tab text="Battery" fx:id="batteryTab"/>
+
+            <!-- Tab for Fuel System configuration -->
+            <Tab text="Fuel System" fx:id="fuelSystemTab">
+                <content>
+                    <VBox spacing="10">
+                        <padding>
+                            <Insets top="10" right="10" bottom="10" left="10"/>
+                        </padding>
+                        <Label text="Select Fuel:" style="-fx-font-weight: bold; -fx-font-size: 14;"/>
+                        <ComboBox fx:id="fuelComboBox" onAction="#configureFuel" prefWidth="200"/>
+
+                        <Label text="Select Battery:" style="-fx-font-weight: bold; -fx-font-size: 14;"/>
+                        <ComboBox fx:id="batteryComboBox" onAction="#configureBattery" prefWidth="200"/>
+                    </VBox>
+                </content>
+            </Tab>
+
+            <Tab text="Lights" fx:id="lightsTab">
+                <content>
+                    <VBox spacing="10" >
+                        <padding>
+                            <Insets top="10" right="10" bottom="10" left="10"/>
+                        </padding>
+                        <Label text="Select Light:" style="-fx-font-weight: bold; -fx-font-size: 14;"/>
+                        <ComboBox fx:id="lightComboBox" onAction="#configureLight" prefWidth="200"/>
+                    </VBox>
+                </content>
+            </Tab>
+
             <Tab text="Accessories" fx:id="accessoriesTab"/>
         </TabPane>
     </center>

@@ -264,6 +264,16 @@
 
 
 
+    <!-- http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#HasFuelName -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#HasFuelName">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Fuel"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+
+
+
     <!-- http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#HasHeight -->
 
     <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#HasHeight">
@@ -877,6 +887,15 @@ In italian, it&apos;s called &quot;bauletto&quot;.</rdfs:comment>
 
 
 
+    <!-- http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Battery2 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Battery2">
+        <rdf:type rdf:resource="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Battery"/>
+        <ScooterConfigurator:HasBatteryCapacity rdf:datatype="http://www.w3.org/2001/XMLSchema#double">7.0</ScooterConfigurator:HasBatteryCapacity>
+    </owl:NamedIndividual>
+
+
+
     <!-- http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Black -->
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Black">
@@ -917,7 +936,17 @@ In italian, it&apos;s called &quot;bauletto&quot;.</rdfs:comment>
     <!-- http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Fuel1 -->
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Fuel1">
-        <rdf:type rdf:resource="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Diesel"/>
+        <rdf:type rdf:resource="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Fuel"/>
+        <ScooterConfigurator:HasFuelName>Gasoline</ScooterConfigurator:HasFuelName>
+    </owl:NamedIndividual>
+
+
+
+    <!-- http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Fuel2 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Fuel2">
+        <rdf:type rdf:resource="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Fuel"/>
+        <ScooterConfigurator:HasFuelName>Diesel</ScooterConfigurator:HasFuelName>
     </owl:NamedIndividual>
 
 
@@ -925,6 +954,7 @@ In italian, it&apos;s called &quot;bauletto&quot;.</rdfs:comment>
     <!-- http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Light1 -->
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Light1">
+        <rdf:type rdf:resource="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Light"/>
         <ScooterConfigurator:HasLightDescription>HeadLight</ScooterConfigurator:HasLightDescription>
     </owl:NamedIndividual>
 
@@ -933,6 +963,7 @@ In italian, it&apos;s called &quot;bauletto&quot;.</rdfs:comment>
     <!-- http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Light2 -->
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Light2">
+        <rdf:type rdf:resource="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Light"/>
         <ScooterConfigurator:HasLightDescription>Taillight</ScooterConfigurator:HasLightDescription>
     </owl:NamedIndividual>
 
@@ -941,6 +972,7 @@ In italian, it&apos;s called &quot;bauletto&quot;.</rdfs:comment>
     <!-- http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Orange -->
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Orange">
+        <rdf:type rdf:resource="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Colour"/>
         <ScooterConfigurator:HasColourName>Orange</ScooterConfigurator:HasColourName>
     </owl:NamedIndividual>
 
@@ -1022,6 +1054,7 @@ In italian, it&apos;s called &quot;bauletto&quot;.</rdfs:comment>
     <!-- http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Seat1 -->
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Seat1">
+        <rdf:type rdf:resource="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Seat"/>
         <ScooterConfigurator:IsMadeOf>Nylon</ScooterConfigurator:IsMadeOf>
     </owl:NamedIndividual>
 
