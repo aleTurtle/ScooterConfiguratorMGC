@@ -1,6 +1,6 @@
 package it.didattica.cs.unicam.progettoloretimgc.ontology;
 
-import it.didattica.cs.unicam.progettoloretimgc.*;
+import it.didattica.cs.unicam.progettoloretimgc.model.*;
 import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
 import org.apache.jena.rdf.model.Resource;
@@ -8,7 +8,6 @@ import org.apache.jena.rdf.model.Resource;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class QueryService {
     private static SPARQLQueryExecutor queryExecutor;
@@ -123,6 +122,31 @@ public class QueryService {
         return windshieldList;
 
     }
+
+    public List<TopCase> getTopCaseComponents(Scooter scooter) {
+        List<TopCase> topcaseList = new ArrayList<>();
+
+        String sparqlQuery = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
+                "PREFIX scooter: <http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#>" +
+                "SELECT ?topcase ?description WHERE { " +
+                "?topcase rdf:type scooter:TopCase . " +
+                "?topcase scooter:HasAccessoryDescription ?description . " +
+                "}";
+
+        ResultSet results = queryExecutor.executeQuery(sparqlQuery);
+        while (results != null && results.hasNext()) {
+            QuerySolution solution = results.nextSolution();
+            Resource topcaseResource = solution.getResource("topcase");
+            String description = solution.getLiteral("description").getString();
+            topcaseList.add(new TopCase(scooter, description));
+        }
+        return topcaseList;
+
+    }
+
+
+
+
 
 /*
     public List<Accessory> getAccessoryComponents(Scooter scooter) {

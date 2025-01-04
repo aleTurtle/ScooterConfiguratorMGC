@@ -1,4 +1,4 @@
-package it.didattica.cs.unicam.progettoloretimgc;
+package it.didattica.cs.unicam.progettoloretimgc.model;
 
 /**
  * Represents a battery component for a scooter.

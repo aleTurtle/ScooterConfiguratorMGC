@@ -1,4 +1,6 @@
-package it.didattica.cs.unicam.progettoloretimgc;
+package it.didattica.cs.unicam.progettoloretimgc.model;
+
+import it.didattica.cs.unicam.progettoloretimgc.model.Scooter;
 
 public class Windshield {
 

@@ -1,4 +1,4 @@
-package it.didattica.cs.unicam.progettoloretimgc;
+package it.didattica.cs.unicam.progettoloretimgc.controller;
 
 import it.didattica.cs.unicam.progettoloretimgc.ontology.OntologyLoader;
 import it.didattica.cs.unicam.progettoloretimgc.ontology.QueryService;

@@ -1,5 +1,6 @@
 package it.didattica.cs.unicam.progettoloretimgc;
 
+import it.didattica.cs.unicam.progettoloretimgc.controller.ScooterConfiguratorController;
 import javafx.application.Application;
 import javafx.stage.Stage;
 

@@ -1,6 +1,7 @@
-package it.didattica.cs.unicam.progettoloretimgc;
+package it.didattica.cs.unicam.progettoloretimgc.model;
 
-import java.util.ArrayList;
+import it.didattica.cs.unicam.progettoloretimgc.model.Colour;
+
 import java.util.List;
 
 public class Scooter {

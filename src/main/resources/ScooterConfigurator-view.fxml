@@ -13,7 +13,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ComboBox?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.didattica.cs.unicam.progettoloretimgc.ScooterViewController" >
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.didattica.cs.unicam.progettoloretimgc.controller.ScooterViewController" >
     <!-- Main content -->
     <center>
 
@@ -69,6 +69,12 @@
                         <padding>
                             <Insets top="10" right="10" bottom="10" left="10"/>
                         </padding>
+
+                        <VBox spacing="10">
+                            <Label text="Select TopCase:" style="-fx-font-weight: bold; -fx-font-size: 14;"/>
+                            <ComboBox fx:id="topcaseComboBox" onAction="#handleSelection" prefWidth="200"/>
+                        </VBox>
+
 
 
 
