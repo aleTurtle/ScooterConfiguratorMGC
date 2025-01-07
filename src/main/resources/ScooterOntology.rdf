@@ -830,7 +830,7 @@ This property is expressed in km.</rdfs:comment>
 
     <owl:Class rdf:about="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#ScooterPlate">
         <rdfs:comment>This class represents a small metal or plastic tag displaying a unique alphanumeric code for scooter identification</rdfs:comment>
-        <rdfs:label>Scooter Plate</rdfs:label>
+        <rdfs:label>ScooterPlate</rdfs:label>
     </owl:Class>
 
 
@@ -927,6 +927,7 @@ In italian, it&apos;s called &quot;bauletto&quot;.</rdfs:comment>
     <!-- http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#ElectricMotor1 -->
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#ElectricMotor1">
+        <rdf:type rdf:resource="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Engine"/>
         <ScooterConfigurator:HasMotorPower rdf:datatype="http://www.w3.org/2001/XMLSchema#double">4.0</ScooterConfigurator:HasMotorPower>
     </owl:NamedIndividual>
 
@@ -935,6 +936,7 @@ In italian, it&apos;s called &quot;bauletto&quot;.</rdfs:comment>
     <!-- http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Engine2 -->
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Engine2">
+        <rdf:type rdf:resource="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Engine"/>
         <ScooterConfigurator:HasEngineDisplacement rdf:datatype="http://www.w3.org/2001/XMLSchema#int">50</ScooterConfigurator:HasEngineDisplacement>
     </owl:NamedIndividual>
 
@@ -1071,6 +1073,7 @@ In italian, it&apos;s called &quot;bauletto&quot;.</rdfs:comment>
     <!-- http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#ScooterPlate1 -->
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#ScooterPlate1">
+        <rdf:type rdf:resource="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#ScooterPlate"/>
         <ScooterConfigurator:HasScooterPlateNumber>CK162YV</ScooterConfigurator:HasScooterPlateNumber>
     </owl:NamedIndividual>
 

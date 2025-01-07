@@ -20,7 +20,7 @@ public class ScooterViewController {
     private ListView<String> configurationList;
 
     @FXML
-    private ComboBox<String> colorComboBox, fuelComboBox, batteryComboBox, lightComboBox, windshieldComboBox, topcaseComboBox;
+    private ComboBox<String> colorComboBox, fuelComboBox, batteryComboBox, lightComboBox, windshieldComboBox, topcaseComboBox,electricComboBox, ICEComboBox,seatComboBox,scooterPlateComboBox;
 
     private QueryService queryService;
     private Scooter scooter = new Scooter("MyScooter");
@@ -52,6 +52,17 @@ public class ScooterViewController {
                 .map(Windshield::getWindshieldDescription).collect(Collectors.toList()));
         configurators.put(topcaseComboBox, () -> queryService.getTopCaseComponents(scooter).stream()
                 .map(TopCase::getTopCaseDescription).collect(Collectors.toList()));
+        configurators.put(electricComboBox, () -> queryService.getElectricComponents(scooter).stream()
+                .map(ElectricMotor::getElectricPowerValue).collect(Collectors.toList()));
+        configurators.put(ICEComboBox, () -> queryService.getICEComponents(scooter).stream()
+                .map(InternalCombustionEngine::getICEvalue).collect(Collectors.toList()));
+        configurators.put(seatComboBox, () -> queryService.getSeatComponents(scooter).stream()
+                .map(Seat::getSeatDescription).collect(Collectors.toList()));
+        configurators.put(scooterPlateComboBox, () -> queryService.getScooterPlateComponents(scooter).stream()
+                .map(ScooterPlate::getScooterPlateIdentifier).collect(Collectors.toList()));
+
+
+
 
         // Popola le ComboBox
         configurators.forEach((comboBox, configurator) -> populateComboBox(comboBox, configurator));
@@ -60,6 +71,9 @@ public class ScooterViewController {
         configurators.keySet().forEach(comboBox -> comboBox.setValue("None"));
     }
 
+
+    //popolo le combo box considerando stringhe tutti i tipi di oggetti nella lsta ma li posso diversificare per
+    // il tipo in questione in base alla box
     private void populateComboBox(ComboBox<String> comboBox, Configurator configurator) {
         List<String> items = configurator.getOptions();
         if (comboBox.getItems().isEmpty()) {
@@ -87,10 +101,26 @@ public class ScooterViewController {
             // Gestisci la selezione normale
             String componentName = getComponentName(comboBox);
             updateConfigurationList(componentName, selectedValue);
+
+            if (isAccessoryComboBox(comboBox)) {
+                // Usa il metodo addAccessoryToList per aggiungere l'accessorio
+                addAccessoryToList(getComponentName(comboBox));
+            }
         } else {
             showAlert("No Selection", "Please select an option.");
         }
     }
+
+    private void addAccessoryToList(String accessoryType) {
+        // Aggiungi l'accessorio solo se non è già presente
+        boolean alreadyExists = configurationList.getItems().stream()
+                .anyMatch(item -> item.startsWith("Accessory: " + accessoryType));
+
+        if (!alreadyExists) {
+            configurationList.getItems().add("Accessory: " + accessoryType);
+        }
+    }
+
 
     private boolean isAccessoryComboBox(ComboBox<String> comboBox) {
         return comboBox == windshieldComboBox || comboBox == topcaseComboBox;
@@ -106,10 +136,20 @@ public class ScooterViewController {
         } else if (comboBox == lightComboBox) {
             return "Light";
         } else if (comboBox == windshieldComboBox) {
-            return "Windshield";
+            return "Accessory";
         } else if (comboBox == topcaseComboBox) {
-            return "Topcase";
+            return "Accessory";
+        }else if (comboBox == electricComboBox) {
+                return "Electric Motor";
+        }else if (comboBox == seatComboBox) {
+            return "Seat";
+        }else if (comboBox == scooterPlateComboBox) {
+            return "ScooterPlate Number";
+
+        }else if (comboBox == ICEComboBox) {
+            return "Internal Combustion Engine";
         }
+
 
         return "Unknown Component";
     }
@@ -132,9 +172,19 @@ public class ScooterViewController {
         // Gestisci il conflitto tra Fuel e Battery
         if (componentName.equals("Fuel")) {
             removeComponentFromList("Battery");
+
         } else if (componentName.equals("Battery")) {
             removeComponentFromList("Fuel");
         }
+
+        // Gestisci il conflitto tra Internal Combustion Engine e Electric Motor
+        if (componentName.equals("Internal Combustion Engine")) {
+            removeComponentFromList("Electric Motor");
+        } else if (componentName.equals("Electric Motor")) {
+            removeComponentFromList("Internal Combustion Engine");
+        }
+
+
 
     }
 
@@ -168,8 +218,12 @@ public class ScooterViewController {
         alert.showAndWait();
     }
 
+
     @FXML
     private void showFinalConfiguration() {
+       this.checkListCompatibility();
+
+        // Mostra la configurazione finale
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Final Configuration");
         alert.setHeaderText(null);
@@ -193,6 +247,45 @@ public class ScooterViewController {
         alert.getDialogPane().setContent(label);
         alert.showAndWait();
     }
+
+    private void checkListCompatibility(){
+        // Flag per rilevare conflitti
+        boolean hasFuel = false;
+        boolean hasElectricMotor = false;
+        boolean hasBattery = false;
+        boolean hasICE = false;
+
+        // Itera sulla lista delle configurazioni
+        for (String config : configurationList.getItems()) {
+            if (config.startsWith("Fuel:")) {
+                hasFuel = true;
+            } else if (config.startsWith("Electric Motor:")) {
+                hasElectricMotor = true;
+            } else if (config.startsWith("Battery:")) {
+                hasBattery = true;
+            } else if (config.startsWith("Internal Combustion Engine:")) {
+                hasICE = true;
+            }
+        }
+
+        // Controlla i conflitti
+        if ((hasFuel && hasElectricMotor) || (hasBattery && hasICE)) {
+            showAlert("Configuration Conflict",
+                    "Conflicting components detected:\n" +
+                            "- Fuel and Electric Motor cannot coexist.\n" +
+                            "- Battery and Internal Combustion Engine cannot coexist.\n" +
+                            "  Please change your configuration");
+            return; // Interrompi la visualizzazione se c'è un conflitto
+        }
+
+    }
+
+    @FXML
+    private void resetList() {
+        // Pulire la ListView per rimuovere tutte le configurazioni
+        configurationList.getItems().clear();
+    }
+
 
     @FunctionalInterface
     interface Configurator {

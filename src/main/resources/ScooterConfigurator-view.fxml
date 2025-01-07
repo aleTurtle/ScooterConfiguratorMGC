@@ -32,8 +32,32 @@
                 </content>
             </Tab>
 
-            <Tab text="Engine" fx:id="engineTab"/>
-            <Tab text="Wheels" fx:id="wheelsTab"/>
+            <Tab text="Engine" fx:id="engineSystemTab">
+                <content>
+                    <VBox spacing="10">
+                        <padding>
+                            <Insets top="10" right="10" bottom="10" left="10"/>
+                        </padding>
+                        <Label text="Select Electric Motor:" style="-fx-font-weight: bold; -fx-font-size: 14;"/>
+                        <ComboBox fx:id="electricComboBox" onAction="#handleSelection" prefWidth="200"/>
+
+                        <Label text="Select Internal Combustion Engine:" style="-fx-font-weight: bold; -fx-font-size: 14;"/>
+                        <ComboBox fx:id="ICEComboBox" onAction="#handleSelection" prefWidth="200"/>
+                    </VBox>
+                </content>
+            </Tab>
+
+            <Tab text="Wheels" fx:id="wheelsTab">
+                <content>
+                    <VBox spacing="10" >
+                        <padding>
+                            <Insets top="10" right="10" bottom="10" left="10"/>
+                        </padding>
+                        <Label text="Select Light:" style="-fx-font-weight: bold; -fx-font-size: 14;"/>
+                        <ComboBox fx:id="wheelComboBox" onAction="#handleSelection" prefWidth="200"/>
+                    </VBox>
+                </content>
+            </Tab>
 
             <!-- Tab for Fuel System configuration -->
             <Tab text="Fuel System" fx:id="fuelSystemTab">
@@ -89,6 +113,45 @@
                 </content>
             </Tab>
 
+            <Tab text="Rider" fx:id="riderTab">
+                <content>
+                    <VBox spacing="10" >
+                        <padding>
+                            <Insets top="10" right="10" bottom="10" left="10"/>
+                        </padding>
+                        <Label text="Select rider:" style="-fx-font-weight: bold; -fx-font-size: 14;"/>
+                        <ComboBox fx:id="riderComboBox" onAction="#handleSelection" prefWidth="200"/>
+                    </VBox>
+                </content>
+            </Tab>
+
+            <Tab text="ScooterPlate" fx:id="scooterPlateTab">
+                <content>
+                    <VBox spacing="10" >
+                        <padding>
+                            <Insets top="10" right="10" bottom="10" left="10"/>
+                        </padding>
+                        <Label text="Select scooter plate:" style="-fx-font-weight: bold; -fx-font-size: 14;"/>
+                        <ComboBox fx:id="scooterPlateComboBox" onAction="#handleSelection" prefWidth="200"/>
+                    </VBox>
+                </content>
+            </Tab>
+
+            <Tab text="Seat" fx:id="seatTab">
+                <content>
+                    <VBox spacing="10" >
+                        <padding>
+                            <Insets top="10" right="10" bottom="10" left="10"/>
+                        </padding>
+                        <Label text="Select seat:" style="-fx-font-weight: bold; -fx-font-size: 14;"/>
+                        <ComboBox fx:id="seatComboBox" onAction="#handleSelection" prefWidth="200"/>
+                    </VBox>
+                </content>
+            </Tab>
+
+
+
+
         </TabPane>
     </center>
 
@@ -100,7 +163,10 @@
             </padding>
             <Label text="Configuration Summary" style="-fx-font-weight: bold; -fx-font-size: 16;"/>
             <ListView fx:id="configurationList" prefHeight="400" />
-            <Button text="Finalize Configuration" onAction="#showFinalConfiguration" style="-fx-background-color: #28a745; -fx-text-fill: white;"/>
+
+            <Button text="Show Configuration" onAction="#showFinalConfiguration" style="-fx-background-color: #28a745; -fx-text-fill: white;"/>
+            <Button text="Reset List" onAction="#resetList" style="-fx-background-color: red; -fx-text-fill: white;"/>
+
         </VBox>
     </right>
 </BorderPane>

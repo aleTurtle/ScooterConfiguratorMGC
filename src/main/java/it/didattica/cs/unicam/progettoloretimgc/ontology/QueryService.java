@@ -79,6 +79,46 @@ public class QueryService {
         return lightList;
     }
 
+    public List<Seat> getSeatComponents(Scooter scooter) {
+        List<Seat> seatList = new ArrayList<>();
+
+        String sparqlQuery = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
+                "PREFIX scooter: <http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#>" +
+                "SELECT ?seat ?description WHERE { " +
+                "?seat rdf:type scooter:Seat . " +
+                "?seat scooter:IsMadeOf ?description . " +
+                "}";
+
+        ResultSet results = queryExecutor.executeQuery(sparqlQuery);
+        while (results != null && results.hasNext()) {
+            QuerySolution solution = results.nextSolution();
+           // Resource fuelResource = solution.getResource("seat");
+            String description = solution.getLiteral("description").getString();
+            seatList.add(new Seat(scooter, description));
+        }
+        return seatList;
+    }
+
+    public List<ScooterPlate> getScooterPlateComponents(Scooter scooter) {
+        List<ScooterPlate> scooterPlateList = new ArrayList<>();
+
+        String sparqlQuery = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
+                "PREFIX scooter: <http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#>" +
+                "SELECT ?scooterPlate ?description WHERE { " +
+                "?scooterPlate rdf:type scooter:ScooterPlate. " +
+                "?scooterPlate scooter:HasScooterPlateNumber ?description . " +
+                "}";
+
+        ResultSet results = queryExecutor.executeQuery(sparqlQuery);
+        while (results != null && results.hasNext()) {
+            QuerySolution solution = results.nextSolution();
+            // Resource fuelResource = solution.getResource("seat");
+            String description = solution.getLiteral("description").getString();
+            scooterPlateList.add(new ScooterPlate(scooter, description));
+        }
+        return scooterPlateList;
+    }
+
 
     public List<Battery> getBatteryComponents(Scooter scooter) {
         List<Battery> batteryList = new ArrayList<>();
@@ -144,31 +184,49 @@ public class QueryService {
 
     }
 
-
-
-
-
-/*
-    public List<Accessory> getAccessoryComponents(Scooter scooter) {
-        List<Accessory> accessoriesList = new ArrayList<>();
+    public List<ElectricMotor> getElectricComponents(Scooter scooter) {
+        List<ElectricMotor> electricMotorsList = new ArrayList<>();
 
         String sparqlQuery = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
                 "PREFIX scooter: <http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#>" +
-                "SELECT ?accessory ?name WHERE { " +
-                "?fuel rdf:type scooter:Fuel . " +
-                "?fuel scooter:HasFuelName ?name . " +
+                "SELECT ?electricMotor ?value WHERE { " +
+                "?electricMotor rdf:type scooter:Engine . " +
+                "?electricMotor scooter:HasMotorPower ?value . " +
                 "}";
 
         ResultSet results = queryExecutor.executeQuery(sparqlQuery);
         while (results != null && results.hasNext()) {
             QuerySolution solution = results.nextSolution();
-            Resource fuelResource = solution.getResource("fuel");
-            String name = solution.getLiteral("name").getString();
-            fuelList.add(new Fuel(scooter, name));
+            Resource electricMotorResource = solution.getResource("electricMotor");
+            double Value = solution.getLiteral("value").getDouble();
+            String value = Double.toString(Value);
+            electricMotorsList.add(new ElectricMotor(scooter, value));
         }
-        return fuelList;
+        return electricMotorsList;
+
     }
 
-*/
+    public List<InternalCombustionEngine> getICEComponents(Scooter scooter) {
+        List<InternalCombustionEngine> ICEMotorsList = new ArrayList<>();
+
+        String sparqlQuery = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
+                "PREFIX scooter: <http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#>" +
+                "SELECT ?ICEMotor ?value WHERE { " +
+                "?ICEMotor rdf:type scooter:Engine . " +
+                "?ICEMotor scooter:HasEngineDisplacement ?value . " +
+                "}";
+
+        ResultSet results = queryExecutor.executeQuery(sparqlQuery);
+        while (results != null && results.hasNext()) {
+            QuerySolution solution = results.nextSolution();
+            Resource ICEMotorResource = solution.getResource("ICEMotor");
+            int Value = solution.getLiteral("value").getInt();
+            String value = Double.toString(Value);
+            ICEMotorsList.add(new InternalCombustionEngine(scooter, value));
+        }
+        return ICEMotorsList;
+
+    }
+
 
 }
