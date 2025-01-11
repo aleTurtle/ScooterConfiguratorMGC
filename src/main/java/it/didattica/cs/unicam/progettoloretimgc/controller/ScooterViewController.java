@@ -87,29 +87,15 @@ public class ScooterViewController {
         ComboBox<String> comboBox = (ComboBox<String>) event.getSource();
         String selectedValue = comboBox.getValue();
 
-        if (selectedValue != null && selectedValue.equals("None")) {
-            if (isAccessoryComboBox(comboBox)) {
-                // Rimuove solo l'accessorio specifico
-                String accessoryType = getComponentName(comboBox);
-                removeAccessoryFromList(accessoryType);
-            } else {
-                // Reimposta il valore precedente e mostra un messaggio di errore
-                comboBox.setValue(comboBox.getItems().stream().filter(item -> !item.equals("None")).findFirst().orElse(null));
-                showAlert("Invalid Selection", "The 'None' option is only allowed for accessories.");
-            }
-        } else if (selectedValue != null) {
-            // Gestisci la selezione normale
+        if (selectedValue != null) {
+            // Gestisci la selezione
             String componentName = getComponentName(comboBox);
             updateConfigurationList(componentName, selectedValue);
-
-            if (isAccessoryComboBox(comboBox)) {
-                // Usa il metodo addAccessoryToList per aggiungere l'accessorio
-                addAccessoryToList(getComponentName(comboBox));
-            }
         } else {
             showAlert("No Selection", "Please select an option.");
         }
     }
+
 
     private void addAccessoryToList(String accessoryType) {
         // Aggiungi l'accessorio solo se non è già presente
@@ -149,8 +135,6 @@ public class ScooterViewController {
         }else if (comboBox == ICEComboBox) {
             return "Internal Combustion Engine";
         }
-
-
         return "Unknown Component";
     }
 
@@ -160,6 +144,18 @@ public class ScooterViewController {
 
 
     private void updateConfigurationList(String componentName, String componentValue) {
+        // Se il valore è "None", rimuovi direttamente il componente dalla lista e termina
+        if (componentValue.equals("None")) {
+            removeComponentFromList(componentName);
+            return;
+        }
+
+        // Per gli accessori, non rimuovere gli altri componenti
+        if (componentValue.equals("Windshield") || componentName.equals("Topcase")) {
+            configurationList.getItems().add(componentName + ": " + componentValue);
+            return;
+        }
+        // Cerca un'entry esistente e rimuovila
         String existingEntry = configurationList.getItems().stream()
                 .filter(item -> item.startsWith(componentName + ":"))
                 .findFirst()
@@ -169,15 +165,12 @@ public class ScooterViewController {
             configurationList.getItems().remove(existingEntry);
         }
 
-        // Aggiungi la nuova voce solo se il valore non è "None"
-        if (!componentValue.equals("None")) {
-            configurationList.getItems().add(componentName + ": " + componentValue);
-        }
+        // Aggiungi la nuova voce
+        configurationList.getItems().add(componentName + ": " + componentValue);
 
         // Gestisci il conflitto tra Fuel e Battery
         if (componentName.equals("Fuel")) {
             removeComponentFromList("Battery");
-
         } else if (componentName.equals("Battery")) {
             removeComponentFromList("Fuel");
         }
@@ -188,10 +181,8 @@ public class ScooterViewController {
         } else if (componentName.equals("Electric Motor")) {
             removeComponentFromList("Internal Combustion Engine");
         }
-
-
-
     }
+
 
     private void removeComponentFromList(String componentName) {
         String conflictingEntry = configurationList.getItems().stream()

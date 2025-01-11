@@ -51,6 +51,9 @@ dependencies {
 
     implementation 'org.slf4j:slf4j-simple:2.0.9'
 
+    // Dipendenza per Mockito
+    testImplementation 'org.mockito:mockito-core:4.5.1'
+
 
 
     // Dipendenze per test
