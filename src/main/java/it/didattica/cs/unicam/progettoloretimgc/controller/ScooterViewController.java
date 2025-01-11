@@ -52,9 +52,9 @@ public class ScooterViewController {
                 .map(Windshield::getWindshieldDescription).collect(Collectors.toList()));
         configurators.put(topcaseComboBox, () -> queryService.getTopCaseComponents(scooter).stream()
                 .map(TopCase::getTopCaseDescription).collect(Collectors.toList()));
-        configurators.put(electricComboBox, () -> queryService.getElectricComponents(scooter).stream()
+        configurators.put(electricComboBox, () -> queryService.getElectricMotorComponents(scooter).stream()
                 .map(ElectricMotor::getElectricPowerValue).collect(Collectors.toList()));
-        configurators.put(ICEComboBox, () -> queryService.getICEComponents(scooter).stream()
+        configurators.put(ICEComboBox, () -> queryService.getInternalCombustionEngineComponents(scooter).stream()
                 .map(InternalCombustionEngine::getICEvalue).collect(Collectors.toList()));
         configurators.put(seatComboBox, () -> queryService.getSeatComponents(scooter).stream()
                 .map(Seat::getSeatDescription).collect(Collectors.toList()));
@@ -140,7 +140,7 @@ public class ScooterViewController {
         } else if (comboBox == topcaseComboBox) {
             return "Accessory";
         }else if (comboBox == electricComboBox) {
-                return "Electric Motor";
+            return "Electric Motor";
         }else if (comboBox == seatComboBox) {
             return "Seat";
         }else if (comboBox == scooterPlateComboBox) {
@@ -153,6 +153,11 @@ public class ScooterViewController {
 
         return "Unknown Component";
     }
+
+
+
+
+
 
     private void updateConfigurationList(String componentName, String componentValue) {
         String existingEntry = configurationList.getItems().stream()

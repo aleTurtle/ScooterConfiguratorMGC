@@ -3,8 +3,6 @@ package it.didattica.cs.unicam.progettoloretimgc.ontology;
 import it.didattica.cs.unicam.progettoloretimgc.model.*;
 import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
-import org.apache.jena.rdf.model.Resource;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,217 +14,120 @@ public class QueryService {
         this.queryExecutor = queryExecutor;
     }
 
-
-
-
-    public List<Colour> getColourComponents(Scooter scooter) {
-        List<Colour> colourList = new ArrayList<>();
-
-        String sparqlQuery = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
-                "PREFIX scooter: <http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#>" +
-                "SELECT ?colour ?name WHERE { " +
-                "?colour rdf:type scooter:Colour . " +
-                "?colour scooter:HasColourName ?name . " +
-                "}";
-
+    // Metodo generico per ottenere i componenti
+    public <T> List<T> getComponents(Scooter scooter, String componentType, String sparqlQuery) {
+        List<T> componentList = new ArrayList<>();
         ResultSet results = queryExecutor.executeQuery(sparqlQuery);
+
         while (results != null && results.hasNext()) {
             QuerySolution solution = results.nextSolution();
-            Resource colourResource = solution.getResource("colour");
-            String name = solution.getLiteral("name").getString();
-            colourList.add(new Colour(scooter, name));
+            T component = createComponent(scooter, componentType, solution);
+            componentList.add(component);
         }
-        return colourList;
+
+        return componentList;
+    }
+
+    // Metodo per creare il componente in base al tipo di componente e ai dati della query
+    public <T> T createComponent(Scooter scooter, String componentType, QuerySolution solution) {
+        T component = null;
+        switch (componentType) {
+            case "Colour" -> component = (T) new Colour(scooter, solution.getLiteral("property").getString());
+            case "Fuel" -> component = (T) new Fuel(scooter, solution.getLiteral("property").getString());
+            case "Light" -> component = (T) new Light(scooter, solution.getLiteral("property").getString());
+            case "Seat" -> component = (T) new Seat(scooter, solution.getLiteral("property").getString());
+            case "ScooterPlate" -> component = (T) new ScooterPlate(scooter, solution.getLiteral("property").getString());
+            case "Battery" -> component = (T) new Battery(scooter, Double.toString(solution.getLiteral("property").getDouble()));
+            case "Windshield" -> component = (T) new Windshield(scooter, solution.getLiteral("property").getString());
+            case "TopCase" -> component = (T) new TopCase(scooter, solution.getLiteral("property").getString());
+            case "ElectricMotor" -> component = (T) new ElectricMotor(scooter, Double.toString(solution.getLiteral("property").getDouble()));
+            case "InternalCombustionEngine" -> component = (T) new InternalCombustionEngine(scooter, Integer.toString(solution.getLiteral("property").getInt()));
+            default -> throw new IllegalArgumentException("Unknown component type: " + componentType);
+        }
+        return component;
+    }
+
+
+    // Costruzione dinamica della query
+    private String buildQuery(String componentType, String property) {
+        String sparqlQuery = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
+                "PREFIX scooter: <http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#>" +
+                "SELECT ?component ?property WHERE { " +
+                "?component rdf:type scooter:" + componentType + " . " +
+                "?component scooter:" + property + " ?property . " +
+                "}";
+
+        return sparqlQuery;
+    }
+
+    // Metodo specifico per ogni componente
+    public List<Colour> getColourComponents(Scooter scooter) {
+        String Colour = "Colour";
+        String HasColourName = "HasColourName";
+        String sparqlQuery= this.buildQuery(Colour,HasColourName);
+        return getComponents(scooter, "Colour", sparqlQuery);
     }
 
     public List<Fuel> getFuelComponents(Scooter scooter) {
-        List<Fuel> fuelList = new ArrayList<>();
-
-        String sparqlQuery = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
-                "PREFIX scooter: <http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#>" +
-                "SELECT ?fuel ?name WHERE { " +
-                "?fuel rdf:type scooter:Fuel . " +
-                "?fuel scooter:HasFuelName ?name . " +
-                "}";
-
-        ResultSet results = queryExecutor.executeQuery(sparqlQuery);
-        while (results != null && results.hasNext()) {
-            QuerySolution solution = results.nextSolution();
-            Resource fuelResource = solution.getResource("fuel");
-            String name = solution.getLiteral("name").getString();
-            fuelList.add(new Fuel(scooter, name));
-        }
-        return fuelList;
+        String Fuel = "Fuel";
+        String HasFuelName = "HasFuelName";
+        String sparqlQuery= this.buildQuery(Fuel,HasFuelName);
+        return getComponents(scooter, "Fuel", sparqlQuery);
     }
 
     public List<Light> getLightComponents(Scooter scooter) {
-        List<Light> lightList = new ArrayList<>();
-
-        String sparqlQuery = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
-                "PREFIX scooter: <http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#>" +
-                "SELECT ?light ?description WHERE { " +
-                "?light rdf:type scooter:Light . " +
-                "?light scooter:HasLightDescription ?description . " +
-                "}";
-
-        ResultSet results = queryExecutor.executeQuery(sparqlQuery);
-        while (results != null && results.hasNext()) {
-            QuerySolution solution = results.nextSolution();
-            Resource fuelResource = solution.getResource("light");
-            String description = solution.getLiteral("description").getString();
-            lightList.add(new Light(scooter, description));
-        }
-        return lightList;
+        String Light = "Light";
+        String HasLightDescription = "HasLightDescription";
+        String sparqlQuery= this.buildQuery(Light,HasLightDescription);
+        return getComponents(scooter, "Light", sparqlQuery);
     }
 
     public List<Seat> getSeatComponents(Scooter scooter) {
-        List<Seat> seatList = new ArrayList<>();
-
-        String sparqlQuery = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
-                "PREFIX scooter: <http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#>" +
-                "SELECT ?seat ?description WHERE { " +
-                "?seat rdf:type scooter:Seat . " +
-                "?seat scooter:IsMadeOf ?description . " +
-                "}";
-
-        ResultSet results = queryExecutor.executeQuery(sparqlQuery);
-        while (results != null && results.hasNext()) {
-            QuerySolution solution = results.nextSolution();
-           // Resource fuelResource = solution.getResource("seat");
-            String description = solution.getLiteral("description").getString();
-            seatList.add(new Seat(scooter, description));
-        }
-        return seatList;
+        String Seat = "Seat";
+        String IsMadeOf = "IsMadeOf";
+        String sparqlQuery= this.buildQuery(Seat,IsMadeOf);
+        return getComponents(scooter, "Seat", sparqlQuery);
     }
 
     public List<ScooterPlate> getScooterPlateComponents(Scooter scooter) {
-        List<ScooterPlate> scooterPlateList = new ArrayList<>();
-
-        String sparqlQuery = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
-                "PREFIX scooter: <http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#>" +
-                "SELECT ?scooterPlate ?description WHERE { " +
-                "?scooterPlate rdf:type scooter:ScooterPlate. " +
-                "?scooterPlate scooter:HasScooterPlateNumber ?description . " +
-                "}";
-
-        ResultSet results = queryExecutor.executeQuery(sparqlQuery);
-        while (results != null && results.hasNext()) {
-            QuerySolution solution = results.nextSolution();
-            // Resource fuelResource = solution.getResource("seat");
-            String description = solution.getLiteral("description").getString();
-            scooterPlateList.add(new ScooterPlate(scooter, description));
-        }
-        return scooterPlateList;
+        String ScooterPlate = "ScooterPlate";
+        String HasScooterPlateNumber = "HasScooterPlateNumber";
+        String sparqlQuery= this.buildQuery(ScooterPlate,HasScooterPlateNumber);
+        return getComponents(scooter, "ScooterPlate", sparqlQuery);
     }
 
-
     public List<Battery> getBatteryComponents(Scooter scooter) {
-        List<Battery> batteryList = new ArrayList<>();
-
-        String sparqlQuery = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
-                "PREFIX scooter: <http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#>" +
-                "SELECT ?battery ?capacity WHERE { " +
-                "?battery rdf:type scooter:Battery . " +
-                "?battery scooter:HasBatteryCapacity ?capacity . " +
-                "}";
-
-        ResultSet results = queryExecutor.executeQuery(sparqlQuery);
-        while (results != null && results.hasNext()) {
-            QuerySolution solution = results.nextSolution();
-            Resource batteryResource = solution.getResource("battery");
-            // Recupera il valore come double e lo converte in stringa
-            double capacityValue = solution.getLiteral("capacity").getDouble();
-            String capacity = Double.toString(capacityValue);
-            batteryList.add(new Battery(scooter, capacity));
-        }
-        return batteryList;
+        String Battery = "Battery";
+        String HasBatteryCapacity  = "HasBatteryCapacity ";
+        String sparqlQuery= this.buildQuery(Battery,HasBatteryCapacity );
+        return getComponents(scooter, "Battery", sparqlQuery);
     }
 
     public List<Windshield> getWindshieldComponents(Scooter scooter) {
-        List<Windshield> windshieldList = new ArrayList<>();
-
-        String sparqlQuery = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
-                "PREFIX scooter: <http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#>" +
-                "SELECT ?windshield ?description WHERE { " +
-                "?windshield rdf:type scooter:Windshield . " +
-                "?windshield scooter:HasAccessoryDescription ?description . " +
-                "}";
-
-        ResultSet results = queryExecutor.executeQuery(sparqlQuery);
-        while (results != null && results.hasNext()) {
-            QuerySolution solution = results.nextSolution();
-            Resource fuelResource = solution.getResource("windshield");
-            String description = solution.getLiteral("description").getString();
-            windshieldList.add(new Windshield(scooter, description));
-        }
-        return windshieldList;
-
+        String Windshield = "Windshield";
+        String HasAccessoryDescription  = "HasAccessoryDescription ";
+        String sparqlQuery= this.buildQuery(Windshield,HasAccessoryDescription );
+        return getComponents(scooter, "Windshield", sparqlQuery);
     }
 
     public List<TopCase> getTopCaseComponents(Scooter scooter) {
-        List<TopCase> topcaseList = new ArrayList<>();
-
-        String sparqlQuery = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
-                "PREFIX scooter: <http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#>" +
-                "SELECT ?topcase ?description WHERE { " +
-                "?topcase rdf:type scooter:TopCase . " +
-                "?topcase scooter:HasAccessoryDescription ?description . " +
-                "}";
-
-        ResultSet results = queryExecutor.executeQuery(sparqlQuery);
-        while (results != null && results.hasNext()) {
-            QuerySolution solution = results.nextSolution();
-            Resource topcaseResource = solution.getResource("topcase");
-            String description = solution.getLiteral("description").getString();
-            topcaseList.add(new TopCase(scooter, description));
-        }
-        return topcaseList;
-
+        String TopCase = "TopCase";
+        String HasAccessoryDescription = "HasAccessoryDescription";
+        String sparqlQuery= this.buildQuery(TopCase,HasAccessoryDescription);
+        return getComponents(scooter, "TopCase", sparqlQuery);
     }
 
-    public List<ElectricMotor> getElectricComponents(Scooter scooter) {
-        List<ElectricMotor> electricMotorsList = new ArrayList<>();
-
-        String sparqlQuery = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
-                "PREFIX scooter: <http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#>" +
-                "SELECT ?electricMotor ?value WHERE { " +
-                "?electricMotor rdf:type scooter:Engine . " +
-                "?electricMotor scooter:HasMotorPower ?value . " +
-                "}";
-
-        ResultSet results = queryExecutor.executeQuery(sparqlQuery);
-        while (results != null && results.hasNext()) {
-            QuerySolution solution = results.nextSolution();
-            Resource electricMotorResource = solution.getResource("electricMotor");
-            double Value = solution.getLiteral("value").getDouble();
-            String value = Double.toString(Value);
-            electricMotorsList.add(new ElectricMotor(scooter, value));
-        }
-        return electricMotorsList;
-
+    public List<ElectricMotor> getElectricMotorComponents(Scooter scooter) {
+        String Engine  = "Engine ";
+        String HasMotorPower = "HasMotorPower";
+        String sparqlQuery= this.buildQuery(Engine ,HasMotorPower  );
+        return getComponents(scooter, "ElectricMotor", sparqlQuery);
     }
 
-    public List<InternalCombustionEngine> getICEComponents(Scooter scooter) {
-        List<InternalCombustionEngine> ICEMotorsList = new ArrayList<>();
-
-        String sparqlQuery = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
-                "PREFIX scooter: <http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#>" +
-                "SELECT ?ICEMotor ?value WHERE { " +
-                "?ICEMotor rdf:type scooter:Engine . " +
-                "?ICEMotor scooter:HasEngineDisplacement ?value . " +
-                "}";
-
-        ResultSet results = queryExecutor.executeQuery(sparqlQuery);
-        while (results != null && results.hasNext()) {
-            QuerySolution solution = results.nextSolution();
-            Resource ICEMotorResource = solution.getResource("ICEMotor");
-            int Value = solution.getLiteral("value").getInt();
-            String value = Double.toString(Value);
-            ICEMotorsList.add(new InternalCombustionEngine(scooter, value));
-        }
-        return ICEMotorsList;
-
+    public List<InternalCombustionEngine> getInternalCombustionEngineComponents(Scooter scooter) {
+        String Engine  = "Engine ";
+        String HasEngineDisplacement ="HasEngineDisplacement ";
+        String sparqlQuery= this.buildQuery(Engine ,HasEngineDisplacement   );
+        return getComponents(scooter, "InternalCombustionEngine", sparqlQuery);
     }
-
-
 }
