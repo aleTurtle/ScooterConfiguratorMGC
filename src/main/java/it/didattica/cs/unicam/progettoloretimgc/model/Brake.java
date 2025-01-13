@@ -1,17 +1,17 @@
 package it.didattica.cs.unicam.progettoloretimgc.model;
 
-public class Wheel {
+public class Brake {
     private Scooter scooter;
 
     private String description;
 
 
-    public Wheel(Scooter scooter, String description){
+    public Brake(Scooter scooter, String description){
         this.scooter=scooter;
         this.description=description;
     }
 
-    public String getWheelDescription(){
+    public String getBrakeDescription(){
         return description;
     }
 }

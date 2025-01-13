@@ -35,7 +35,9 @@ public class QueryService {
             case "Colour" -> component = (T) new Colour(scooter, solution.getLiteral("property").getString());
             case "Fuel" -> component = (T) new Fuel(scooter, solution.getLiteral("property").getString());
             case "Light" -> component = (T) new Light(scooter, solution.getLiteral("property").getString());
+            case "Brake" -> component = (T) new Brake(scooter, solution.getLiteral("property").getString());
             case "Seat" -> component = (T) new Seat(scooter, solution.getLiteral("property").getString());
+            case "Wheel" -> component = (T) new Wheel(scooter, solution.getLiteral("property").getString());
             case "ScooterPlate" -> component = (T) new ScooterPlate(scooter, solution.getLiteral("property").getString());
             case "Battery" -> component = (T) new Battery(scooter, Double.toString(solution.getLiteral("property").getDouble()));
             case "Windshield" -> component = (T) new Windshield(scooter, solution.getLiteral("property").getString());
@@ -96,12 +98,6 @@ public class QueryService {
         return getComponents(scooter, "ScooterPlate", sparqlQuery);
     }
 
-    public List<Battery> getBatteryComponents(Scooter scooter) {
-        String Battery = "Battery";
-        String HasBatteryCapacity  = "HasBatteryCapacity ";
-        String sparqlQuery= this.buildQuery(Battery,HasBatteryCapacity );
-        return getComponents(scooter, "Battery", sparqlQuery);
-    }
 
     public List<Windshield> getWindshieldComponents(Scooter scooter) {
         String Windshield = "Windshield";
@@ -117,6 +113,12 @@ public class QueryService {
         return getComponents(scooter, "TopCase", sparqlQuery);
     }
 
+    public List<Battery> getBatteryComponents(Scooter scooter) {
+        String Battery = "Battery";
+        String HasBatteryCapacity  = "HasBatteryCapacity ";
+        String sparqlQuery= this.buildQuery(Battery,HasBatteryCapacity );
+        return getComponents(scooter, "Battery", sparqlQuery);
+    }
     public List<ElectricMotor> getElectricMotorComponents(Scooter scooter) {
         String Engine  = "Engine ";
         String HasMotorPower = "HasMotorPower";
@@ -130,4 +132,18 @@ public class QueryService {
         String sparqlQuery= this.buildQuery(Engine ,HasEngineDisplacement   );
         return getComponents(scooter, "InternalCombustionEngine", sparqlQuery);
     }
+
+    public List<Brake> getBrakeComponents(Scooter scooter) {
+        String Brake  = "Brake ";
+        String HasBrakeDescription ="HasBrakeDescription ";
+        String sparqlQuery= this.buildQuery(Brake ,HasBrakeDescription   );
+        return getComponents(scooter, "Brake", sparqlQuery);
+    }
+    public List<Wheel> getWheelComponents(Scooter scooter) {
+        String Wheel  = "Wheel";
+        String HasWheelDescription ="HasWheelDescription ";
+        String sparqlQuery= this.buildQuery(Wheel ,HasWheelDescription   );
+        return getComponents(scooter, "Wheel", sparqlQuery);
+    }
+
 }

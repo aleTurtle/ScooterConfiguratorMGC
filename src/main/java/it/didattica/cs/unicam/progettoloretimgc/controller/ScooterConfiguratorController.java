@@ -37,7 +37,7 @@ public class ScooterConfiguratorController {
         FXMLLoader fxmlLoader = new FXMLLoader(fxmlResource);
 
         // Carica la scena dal file FXML
-        Scene scene = new Scene(fxmlLoader.load(), 810, 600);
+        Scene scene = new Scene(fxmlLoader.load(), 870, 600);
 
         // Recupera il controller dal FXML
         ScooterViewController viewController = fxmlLoader.getController();

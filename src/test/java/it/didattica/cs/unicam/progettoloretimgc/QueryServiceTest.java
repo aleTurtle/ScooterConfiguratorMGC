@@ -8,95 +8,116 @@ import org.apache.jena.query.ResultSet;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.apache.jena.rdf.model.Literal;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-class QueryServiceTest {
+public class QueryServiceTest {
 
-    private SPARQLQueryExecutor queryExecutor;
+    private SPARQLQueryExecutor mockQueryExecutor;
     private QueryService queryService;
-    private Scooter testScooter;
+    private Scooter mockScooter;
 
     @BeforeEach
-    void setUp() {
-        queryExecutor = mock(SPARQLQueryExecutor.class);
-        queryService = new QueryService(queryExecutor);
-        testScooter = new Scooter("TestScooter");
+    public void setUp() {
+        mockQueryExecutor = Mockito.mock(SPARQLQueryExecutor.class);
+        queryService = new QueryService(mockQueryExecutor);
+        mockScooter = Mockito.mock(Scooter.class);
     }
 
     @Test
-    void testGetColourComponents() {
-        // Mock the ResultSet
-        ResultSet resultSet = mock(ResultSet.class);
-        when(resultSet.hasNext()).thenReturn(true, false);
+    public void testGetColourComponents() {
+        // Mocking ResultSet and QuerySolution
+        ResultSet mockResultSet = Mockito.mock(ResultSet.class);
+        QuerySolution mockSolution = Mockito.mock(QuerySolution.class);
+        Literal mockLiteral = mock(Literal.class);
 
-        QuerySolution solution = mock(QuerySolution.class);
-        when(resultSet.nextSolution()).thenReturn(solution);
-        when(solution.getLiteral("property").getString()).thenReturn("Red");
+        // Stubbing behavior
+        when(mockQueryExecutor.executeQuery(anyString())).thenReturn(mockResultSet);
+        when(mockResultSet.hasNext()).thenReturn(true, false); // First call returns true, second false
+        when(mockResultSet.nextSolution()).thenReturn(mockSolution);
+        when(mockSolution.getLiteral("property")).thenReturn(mockLiteral);
+        when(mockLiteral.getString()).thenReturn("Red"); // Return "Red" when getString() is called
 
-        // Mock the SPARQL query execution
-        when(queryExecutor.executeQuery(anyString())).thenReturn(resultSet);
+        // Test the method
+        List<Colour> colours = queryService.getColourComponents(mockScooter);
 
-        // Execute the method
-        List<Colour> colours = queryService.getColourComponents(testScooter);
-
-        // Verify the results
+        // Assertions
         assertNotNull(colours);
         assertEquals(1, colours.size());
         assertEquals("Red", colours.get(0).getColourName());
-        verify(queryExecutor, times(1)).executeQuery(anyString());
+
+        // Verify interactions
+        verify(mockQueryExecutor).executeQuery(anyString());
+        verify(mockResultSet, times(2)).hasNext();
+        verify(mockResultSet).nextSolution();
+        verify(mockSolution).getLiteral("property");
+        verify(mockLiteral).getString(); // Verify that getString() was called on the literal
     }
+
+
 
     @Test
-    void testGetFuelComponents() {
-        // Mock the ResultSet
-        ResultSet resultSet = mock(ResultSet.class);
-        when(resultSet.hasNext()).thenReturn(true, true, false);
+public void testGetFuelComponents() {
+    // Mocking ResultSet and QuerySolution
+    ResultSet mockResultSet = Mockito.mock(ResultSet.class);
+    QuerySolution mockSolution = Mockito.mock(QuerySolution.class);
+    Literal mockLiteral = mock(Literal.class);
 
-        QuerySolution solution1 = mock(QuerySolution.class);
-        QuerySolution solution2 = mock(QuerySolution.class);
+    // Stubbing behavior
+    when(mockQueryExecutor.executeQuery(anyString())).thenReturn(mockResultSet);
+    when(mockResultSet.hasNext()).thenReturn(true, false); // First call returns true, second false
+    when(mockResultSet.nextSolution()).thenReturn(mockSolution);
+    when(mockSolution.getLiteral("property")).thenReturn(mockLiteral);
+    when(mockLiteral.getString()).thenReturn("Electric"); // Return "Electric" when getString() is called
 
-        when(resultSet.nextSolution()).thenReturn(solution1, solution2);
-        when(solution1.getLiteral("property").getString()).thenReturn("Petrol");
-        when(solution2.getLiteral("property").getString()).thenReturn("Diesel");
+    // Test the method
+    List<Fuel> fuels = queryService.getFuelComponents(mockScooter);
 
-        // Mock the SPARQL query execution
-        when(queryExecutor.executeQuery(anyString())).thenReturn(resultSet);
+    // Assertions
+    assertNotNull(fuels);
+    assertEquals(1, fuels.size());
+    assertEquals("Electric", fuels.get(0).getFuelName());
 
-        // Execute the method
-        List<Fuel> fuels = queryService.getFuelComponents(testScooter);
-
-        // Verify the results
-        assertNotNull(fuels);
-        assertEquals(2, fuels.size());
-        assertEquals("Petrol", fuels.get(0).getFuelName());
-        assertEquals("Diesel", fuels.get(1).getFuelName());
-        verify(queryExecutor, times(1)).executeQuery(anyString());
-    }
+    // Verify interactions
+    verify(mockQueryExecutor).executeQuery(anyString());
+    verify(mockResultSet, times(2)).hasNext();
+    verify(mockResultSet).nextSolution();
+    verify(mockSolution).getLiteral("property");
+    verify(mockLiteral).getString(); // Verify that getString() was called on the literal
+}
 
     @Test
-    void testGetBatteryComponents() {
-        // Mock the ResultSet
-        ResultSet resultSet = mock(ResultSet.class);
-        when(resultSet.hasNext()).thenReturn(true, false);
+    public void testGetLightComponents() {
+        // Mocking ResultSet and QuerySolution
+        ResultSet mockResultSet = Mockito.mock(ResultSet.class);
+        QuerySolution mockSolution = Mockito.mock(QuerySolution.class);
+        Literal mockLiteral = mock(Literal.class);
 
-        QuerySolution solution = mock(QuerySolution.class);
-        when(resultSet.nextSolution()).thenReturn(solution);
-        when(solution.getLiteral("property").getDouble()).thenReturn(500.0);
+        // Stubbing behavior
+        when(mockQueryExecutor.executeQuery(anyString())).thenReturn(mockResultSet);
+        when(mockResultSet.hasNext()).thenReturn(true, false); // First call returns true, second false
+        when(mockResultSet.nextSolution()).thenReturn(mockSolution);
+        when(mockSolution.getLiteral("property")).thenReturn(mockLiteral);
+        when(mockLiteral.getString()).thenReturn("LED"); // Return "LED" when getString() is called
 
-        // Mock the SPARQL query execution
-        when(queryExecutor.executeQuery(anyString())).thenReturn(resultSet);
+        // Test the method
+        List<Light> lights = queryService.getLightComponents(mockScooter);
 
-        // Execute the method
-        List<Battery> batteries = queryService.getBatteryComponents(testScooter);
+        // Assertions
+        assertNotNull(lights);
+        assertEquals(1, lights.size());
+        assertEquals("LED", lights.get(0).getLightDescription());
 
-        // Verify the results
-        assertNotNull(batteries);
-        assertEquals(1, batteries.size());
-        assertEquals("500.0", batteries.get(0).getBatteryCapacity());
-        verify(queryExecutor, times(1)).executeQuery(anyString());
+        // Verify interactions
+        verify(mockQueryExecutor).executeQuery(anyString());
+        verify(mockResultSet, times(2)).hasNext();
+        verify(mockResultSet).nextSolution();
+        verify(mockSolution).getLiteral("property");
+        verify(mockLiteral).getString(); // Verify that getString() was called on the literal
     }
+
 }

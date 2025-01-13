@@ -1,5 +1,6 @@
-package it.didattica.cs.unicam.progettoloretimgc.ontology;
+package it.didattica.cs.unicam.progettoloretimgc;
 
+import it.didattica.cs.unicam.progettoloretimgc.ontology.OntologyLoader;
 import org.apache.jena.ontology.OntModel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

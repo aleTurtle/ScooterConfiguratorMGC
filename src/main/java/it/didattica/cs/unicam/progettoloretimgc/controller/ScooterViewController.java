@@ -20,9 +20,13 @@ public class ScooterViewController {
     private ListView<String> configurationList;
 
     @FXML
-    private ComboBox<String> colorComboBox, fuelComboBox, batteryComboBox, lightComboBox, windshieldComboBox, topcaseComboBox,electricComboBox, ICEComboBox,seatComboBox,scooterPlateComboBox;
+    private ComboBox<String> colorComboBox, fuelComboBox, batteryComboBox, lightComboBox, windshieldComboBox, topcaseComboBox,
+             electricComboBox, ICEComboBox,seatComboBox,scooterPlateComboBox, wheelComboBox,brakeComboBox;
 
     private QueryService queryService;
+    @FXML
+    private TextArea riderTextArea;
+
     private Scooter scooter = new Scooter("MyScooter");
 
     // Mappa per gestire le configurazioni dinamicamente
@@ -36,6 +40,7 @@ public class ScooterViewController {
             initializeConfigurations();
         }
     }
+
 
     @FXML
     private void initializeConfigurations() {
@@ -60,8 +65,10 @@ public class ScooterViewController {
                 .map(Seat::getSeatDescription).collect(Collectors.toList()));
         configurators.put(scooterPlateComboBox, () -> queryService.getScooterPlateComponents(scooter).stream()
                 .map(ScooterPlate::getScooterPlateIdentifier).collect(Collectors.toList()));
-
-
+        configurators.put(wheelComboBox, () -> queryService.getWheelComponents(scooter).stream()
+                .map(Wheel::getWheelDescription).collect(Collectors.toList()));
+        configurators.put(brakeComboBox, () -> queryService.getBrakeComponents(scooter).stream()
+                .map(Brake::getBrakeDescription).collect(Collectors.toList()));
 
 
         // Popola le ComboBox
@@ -97,21 +104,6 @@ public class ScooterViewController {
     }
 
 
-    private void addAccessoryToList(String accessoryType) {
-        // Aggiungi l'accessorio solo se non è già presente
-        boolean alreadyExists = configurationList.getItems().stream()
-                .anyMatch(item -> item.startsWith("Accessory: " + accessoryType));
-
-        if (!alreadyExists) {
-            configurationList.getItems().add("Accessory: " + accessoryType);
-        }
-    }
-
-
-    private boolean isAccessoryComboBox(ComboBox<String> comboBox) {
-        return comboBox == windshieldComboBox || comboBox == topcaseComboBox;
-    }
-
     private String getComponentName(ComboBox<String> comboBox) {
         if (comboBox == colorComboBox) {
             return "Colour";
@@ -119,6 +111,8 @@ public class ScooterViewController {
             return "Fuel";
         } else if (comboBox == batteryComboBox) {
             return "Battery";
+        } else if (comboBox == brakeComboBox) {
+            return "Brake";
         } else if (comboBox == lightComboBox) {
             return "Light";
         } else if (comboBox == windshieldComboBox) {
@@ -131,7 +125,8 @@ public class ScooterViewController {
             return "Seat";
         }else if (comboBox == scooterPlateComboBox) {
             return "ScooterPlate Number";
-
+        }else if (comboBox == wheelComboBox) {
+            return "Wheel";
         }else if (comboBox == ICEComboBox) {
             return "Internal Combustion Engine";
         }
@@ -195,16 +190,6 @@ public class ScooterViewController {
         }
     }
 
-    private void removeAccessoryFromList(String accessoryType) {
-        String accessoryEntry = configurationList.getItems().stream()
-                .filter(item -> item.startsWith("Accessory: " + accessoryType))
-                .findFirst()
-                .orElse(null);
-
-        if (accessoryEntry != null) {
-            configurationList.getItems().remove(accessoryEntry);
-        }
-    }
 
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -217,7 +202,7 @@ public class ScooterViewController {
 
     @FXML
     private void showFinalConfiguration() {
-       this.checkListCompatibility();
+        this.checkListCompatibility();
 
         // Mostra la configurazione finale
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

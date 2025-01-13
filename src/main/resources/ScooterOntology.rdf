@@ -46,6 +46,7 @@
     <!-- http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#HasBattery -->
 
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#HasBattery">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
         <rdfs:domain rdf:resource="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#ElectricScooter"/>
         <rdfs:range rdf:resource="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Battery"/>
         <rdfs:comment>This object property relates an electric scooter to its battery power supply.</rdfs:comment>
@@ -80,6 +81,7 @@
     <!-- http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#HasEngine -->
 
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#HasEngine">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
         <rdfs:domain rdf:resource="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Scooter"/>
         <rdfs:range rdf:resource="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Engine"/>
         <rdfs:comment>This object property relates a scooter to its engine.</rdfs:comment>
@@ -91,6 +93,7 @@
     <!-- http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#HasPowerSupply -->
 
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#HasPowerSupply">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
         <rdfs:domain rdf:resource="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Scooter"/>
         <rdfs:range rdf:resource="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#FuelSystem"/>
         <rdfs:comment>This object property relates a scooter to its power supply.</rdfs:comment>
@@ -114,6 +117,7 @@
     <!-- http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#HasScooterLicense -->
 
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#HasScooterLicense">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
         <rdfs:domain rdf:resource="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Rider"/>
         <rdfs:range rdf:resource="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#ScooterLicense"/>
         <rdfs:comment>This object property relates a rider to his scooter license.</rdfs:comment>
@@ -220,6 +224,8 @@
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
         <rdfs:domain rdf:resource="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Accessory"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>This data property specifies a description for the specific accessory</rdfs:comment>
+        <rdfs:label>HasAccessoryDescription</rdfs:label>
     </owl:DatatypeProperty>
 
 
@@ -231,7 +237,6 @@
         <rdfs:domain rdf:resource="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Battery"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
         <rdfs:comment>This data property represents the capacity of a battery and is expressed in kWh.</rdfs:comment>
-        <rdfs:comment>This data property specifies the maxium speed of a scooter</rdfs:comment>
         <rdfs:label>HasBatteryCapacity</rdfs:label>
     </owl:DatatypeProperty>
 
@@ -245,6 +250,16 @@
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
         <rdfs:comment>This data property specifies the time to charge a battery of a scooter. It&apos;s expressed in hours.</rdfs:comment>
         <rdfs:label>HasBatteryChargingTime</rdfs:label>
+    </owl:DatatypeProperty>
+
+
+
+    <!-- http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#HasBrakeDescription -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#HasBrakeDescription">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Brake"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
     </owl:DatatypeProperty>
 
 
@@ -280,6 +295,8 @@
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
         <rdfs:domain rdf:resource="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Fuel"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>This data property specifies the fuel name of a scooter</rdfs:comment>
+        <rdfs:label>HasFuelName</rdfs:label>
     </owl:DatatypeProperty>
 
 
@@ -301,7 +318,6 @@
     <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#HasLenght">
         <rdfs:domain rdf:resource="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Scooter"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
-        <rdfs:comment>This data properry shows the specific height within the allowable range. It&apos;s expressed in meters (m).</rdfs:comment>
         <rdfs:comment>This data property shows the specific leght of a scooter within the allowable range.</rdfs:comment>
         <rdfs:label>HasLenght</rdfs:label>
     </owl:DatatypeProperty>
@@ -326,8 +342,6 @@
         <rdfs:domain rdf:resource="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Scooter"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
         <rdfs:comment>This data property specifies the maximum speed of a scooter and is expressed in km/h</rdfs:comment>
-        <rdfs:comment>This data property specifies the maximum weight of a scooter and is expressed in kg</rdfs:comment>
-        <rdfs:comment>This data property specifies the maximum weight of a scooter and is expressed in kg.</rdfs:comment>
         <rdfs:label>HasMaximumSpeed</rdfs:label>
     </owl:DatatypeProperty>
 
@@ -336,6 +350,7 @@
     <!-- http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#HasMaximumWeight -->
 
     <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#HasMaximumWeight">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
         <rdfs:domain rdf:resource="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Scooter"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
         <rdfs:comment>This data property specifies the maximum weight of a scooter and it&apos;s expressed in kg.</rdfs:comment>
@@ -377,6 +392,18 @@ This property is expressed in km.</rdfs:comment>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
         <rdfs:comment>This data property relates a scooter plate to its specific code.</rdfs:comment>
         <rdfs:label>HasScooterPlateNumber</rdfs:label>
+    </owl:DatatypeProperty>
+
+
+
+    <!-- http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#HasWheelDescription -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#HasWheelDescription">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Wheel"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>This data property specifies wheel dimensions for small wheels (10-16 inch wheels) and larger wheels (17-22 inch wheels)</rdfs:comment>
+        <rdfs:label>HasWheelDescription</rdfs:label>
     </owl:DatatypeProperty>
 
 
@@ -485,7 +512,7 @@ This property is expressed in km.</rdfs:comment>
     <!-- http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Brake -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Brake">
-        <rdfs:comment>This class represnts a mechanism used to slow down or stop a scooter, with front and rear controls.</rdfs:comment>
+        <rdfs:comment>This class represents a mechanism used to slow down or stop a scooter, with front and rear controls.</rdfs:comment>
         <rdfs:label>Brake</rdfs:label>
     </owl:Class>
 
@@ -511,9 +538,27 @@ This property is expressed in km.</rdfs:comment>
     <!-- http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#ElectricMotor -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#ElectricMotor">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#HasMotorPower"/>
+                <owl:someValuesFrom>
+                    <rdfs:Datatype>
+                        <owl:onDatatype rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+                        <owl:withRestrictions rdf:parseType="Collection">
+                            <rdf:Description>
+                                <xsd:minInclusive rdf:datatype="http://www.w3.org/2001/XMLSchema#double">2.5</xsd:minInclusive>
+                            </rdf:Description>
+                            <rdf:Description>
+                                <xsd:maxExclusive rdf:datatype="http://www.w3.org/2001/XMLSchema#double">9.0</xsd:maxExclusive>
+                            </rdf:Description>
+                        </owl:withRestrictions>
+                    </rdfs:Datatype>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Engine"/>
+        <rdfs:comment>This class represents an electric scooter motor: it&apos;s a battery-powered motor, tipically ranging from 2500 W to 9000 W.</rdfs:comment>
         <rdfs:label>Electric Motor</rdfs:label>
-        <rdfs:label>This class represents an electric scooter motor: it&apos;s a battery-powered motor, tipically ranging from 250 W to 1000 W.</rdfs:label>
     </owl:Class>
 
 
@@ -651,22 +696,27 @@ This property is expressed in km.</rdfs:comment>
 
     <owl:Class rdf:about="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#InternalCombustionEngine">
         <owl:equivalentClass>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#HasEngineDisplacement"/>
-                <owl:someValuesFrom>
-                    <rdfs:Datatype>
-                        <owl:onDatatype rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
-                        <owl:withRestrictions rdf:parseType="Collection">
-                            <rdf:Description>
-                                <xsd:minInclusive rdf:datatype="http://www.w3.org/2001/XMLSchema#int">50</xsd:minInclusive>
-                            </rdf:Description>
-                            <rdf:Description>
-                                <xsd:maxExclusive rdf:datatype="http://www.w3.org/2001/XMLSchema#int">125</xsd:maxExclusive>
-                            </rdf:Description>
-                        </owl:withRestrictions>
-                    </rdfs:Datatype>
-                </owl:someValuesFrom>
-            </owl:Restriction>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Engine"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#HasEngineDisplacement"/>
+                        <owl:someValuesFrom>
+                            <rdfs:Datatype>
+                                <owl:onDatatype rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+                                <owl:withRestrictions rdf:parseType="Collection">
+                                    <rdf:Description>
+                                        <xsd:minInclusive rdf:datatype="http://www.w3.org/2001/XMLSchema#int">50</xsd:minInclusive>
+                                    </rdf:Description>
+                                    <rdf:Description>
+                                        <xsd:maxExclusive rdf:datatype="http://www.w3.org/2001/XMLSchema#int">125</xsd:maxExclusive>
+                                    </rdf:Description>
+                                </owl:withRestrictions>
+                            </rdfs:Datatype>
+                        </owl:someValuesFrom>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
         </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Engine"/>
         <rdfs:comment>This class represents a type of engine that generates power by burning fuel (usually gasoline or diesel) to convert energy into motion.
@@ -820,6 +870,12 @@ This property is expressed in km.</rdfs:comment>
     <!-- http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#ScooterLicense -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#ScooterLicense">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#HasRequiredLicenseFor"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Scooter"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
         <rdfs:comment>This class represents a license to drive a scooter.</rdfs:comment>
         <rdfs:label>Scooter License</rdfs:label>
     </owl:Class>
@@ -858,7 +914,7 @@ In italian, it&apos;s called &quot;bauletto&quot;.</rdfs:comment>
     <!-- http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Wheel -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Wheel">
-        <rdfs:comment>This class represents what provides movement and stability of the scooter, transferring engine pwer to the grouns. Smaller wheels offer agility, while larger ones improve stability on rough roads.</rdfs:comment>
+        <rdfs:comment>This class represents what provides movement and stability of the scooter, transferring engine power to the grouns. Smaller wheels offer agility, while larger ones improve stability on rough roads.</rdfs:comment>
         <rdfs:label>Wheel</rdfs:label>
     </owl:Class>
 
@@ -914,13 +970,19 @@ In italian, it&apos;s called &quot;bauletto&quot;.</rdfs:comment>
 
     <!-- http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Brake1 -->
 
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Brake1"/>
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Brake1">
+        <rdf:type rdf:resource="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Brake"/>
+        <ScooterConfigurator:HasBrakeDescription>Disc brake</ScooterConfigurator:HasBrakeDescription>
+    </owl:NamedIndividual>
 
 
 
     <!-- http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Brake2 -->
 
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Brake2"/>
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Brake2">
+        <rdf:type rdf:resource="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Brake"/>
+        <ScooterConfigurator:HasBrakeDescription>Drum brake</ScooterConfigurator:HasBrakeDescription>
+    </owl:NamedIndividual>
 
 
 
@@ -945,7 +1007,7 @@ In italian, it&apos;s called &quot;bauletto&quot;.</rdfs:comment>
     <!-- http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Fuel1 -->
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Fuel1">
-        <rdf:type rdf:resource="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Fuel"/>
+        <rdf:type rdf:resource="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Gasoline"/>
         <ScooterConfigurator:HasFuelName>Gasoline</ScooterConfigurator:HasFuelName>
     </owl:NamedIndividual>
 
@@ -956,6 +1018,15 @@ In italian, it&apos;s called &quot;bauletto&quot;.</rdfs:comment>
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Fuel2">
         <rdf:type rdf:resource="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Fuel"/>
         <ScooterConfigurator:HasFuelName>Diesel</ScooterConfigurator:HasFuelName>
+    </owl:NamedIndividual>
+
+
+
+    <!-- http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Fuel3 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Fuel3">
+        <rdf:type rdf:resource="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Fuel"/>
+        <ScooterConfigurator:HasFuelName>Gasoline</ScooterConfigurator:HasFuelName>
     </owl:NamedIndividual>
 
 
@@ -1065,7 +1136,7 @@ In italian, it&apos;s called &quot;bauletto&quot;.</rdfs:comment>
     <!-- http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#ScooterLicense1 -->
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#ScooterLicense1">
-        <rdf:type rdf:resource="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#A1"/>
+        <rdf:type rdf:resource="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#AM"/>
     </owl:NamedIndividual>
 
 
@@ -1083,7 +1154,7 @@ In italian, it&apos;s called &quot;bauletto&quot;.</rdfs:comment>
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Seat1">
         <rdf:type rdf:resource="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Seat"/>
-        <ScooterConfigurator:IsMadeOf>Nylon</ScooterConfigurator:IsMadeOf>
+        <ScooterConfigurator:IsMadeOf>Leather</ScooterConfigurator:IsMadeOf>
     </owl:NamedIndividual>
 
 
@@ -1101,6 +1172,7 @@ In italian, it&apos;s called &quot;bauletto&quot;.</rdfs:comment>
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Wheel1">
         <rdf:type rdf:resource="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Wheel"/>
+        <ScooterConfigurator:HasWheelDescription>Small wheel</ScooterConfigurator:HasWheelDescription>
     </owl:NamedIndividual>
 
 
@@ -1109,6 +1181,15 @@ In italian, it&apos;s called &quot;bauletto&quot;.</rdfs:comment>
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Wheel2">
         <rdf:type rdf:resource="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Wheel"/>
+    </owl:NamedIndividual>
+
+
+
+    <!-- http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Wheel3 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Wheel3">
+        <rdf:type rdf:resource="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Wheel"/>
+        <ScooterConfigurator:HasWheelDescription>Large wheel</ScooterConfigurator:HasWheelDescription>
     </owl:NamedIndividual>
 
 
