@@ -1,8 +1,8 @@
-package it.didattica.cs.unicam.progettoloretimgc.controller;
+package it.didattica.cs.unicam.mgc.ScooterConfigurator.controller;
 
-import it.didattica.cs.unicam.progettoloretimgc.ontology.OntologyLoader;
-import it.didattica.cs.unicam.progettoloretimgc.ontology.QueryService;
-import it.didattica.cs.unicam.progettoloretimgc.ontology.SPARQLQueryExecutor;
+import it.didattica.cs.unicam.mgc.ScooterConfigurator.ontology.SPARQLQueryExecutor;
+import it.didattica.cs.unicam.mgc.ScooterConfigurator.ontology.OntologyLoader;
+import it.didattica.cs.unicam.mgc.ScooterConfigurator.ontology.QueryService;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;

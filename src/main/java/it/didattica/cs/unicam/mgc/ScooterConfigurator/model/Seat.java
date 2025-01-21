@@ -1,17 +1,17 @@
-package it.didattica.cs.unicam.progettoloretimgc.model;
+package it.didattica.cs.unicam.mgc.ScooterConfigurator.model;
 
-public class Brake {
+public class Seat {
     private Scooter scooter;
 
     private String description;
 
 
-    public Brake(Scooter scooter, String description){
+    public Seat(Scooter scooter, String description){
         this.scooter=scooter;
         this.description=description;
     }
 
-    public String getBrakeDescription(){
+    public String getSeatDescription(){
         return description;
     }
 }

@@ -1,8 +1,12 @@
-package it.didattica.cs.unicam.progettoloretimgc;
+package it.didattica.cs.unicam.mgc.ScooterConfigurator;
 
-import it.didattica.cs.unicam.progettoloretimgc.model.*;
-import it.didattica.cs.unicam.progettoloretimgc.ontology.QueryService;
-import it.didattica.cs.unicam.progettoloretimgc.ontology.SPARQLQueryExecutor;
+import it.didattica.cs.unicam.mgc.ScooterConfigurator.model.Colour;
+import it.didattica.cs.unicam.mgc.ScooterConfigurator.model.Fuel;
+import it.didattica.cs.unicam.mgc.ScooterConfigurator.model.Light;
+import it.didattica.cs.unicam.mgc.ScooterConfigurator.model.Scooter;
+import it.didattica.cs.unicam.mgc.ScooterConfigurator.ontology.SPARQLQueryExecutor;
+import it.didattica.cs.unicam.mgc.model.*;
+import it.didattica.cs.unicam.mgc.ScooterConfigurator.ontology.QueryService;
 import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
 import org.junit.jupiter.api.BeforeEach;

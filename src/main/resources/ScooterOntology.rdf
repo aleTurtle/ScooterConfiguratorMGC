@@ -108,7 +108,7 @@
         <owl:inverseOf rdf:resource="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#RequiresLicense"/>
         <rdfs:domain rdf:resource="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#ScooterLicense"/>
         <rdfs:range rdf:resource="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Scooter"/>
-        <rdfs:comment>This object property relates a scooter license to its scooter so that it can be ridden correctly.</rdfs:comment>
+        <rdfs:comment>This object property relates a scooter license to its scooter so that it can be ridden correctly by a rider.</rdfs:comment>
         <rdfs:label>HasRequiredLicenseFor</rdfs:label>
     </owl:ObjectProperty>
 
@@ -189,6 +189,8 @@
 
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#RiddenBy">
         <owl:inverseOf rdf:resource="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#RidesScooter"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Scooter"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Rider"/>
         <rdfs:comment>This object property relates a scooter to its rider.</rdfs:comment>
         <rdfs:label>RiddenBy</rdfs:label>
     </owl:ObjectProperty>
@@ -260,6 +262,8 @@
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
         <rdfs:domain rdf:resource="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Brake"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>This data property specifies a description for brakes.</rdfs:comment>
+        <rdfs:label>HasBrakeDescription</rdfs:label>
     </owl:DatatypeProperty>
 
 
@@ -454,8 +458,8 @@ This property is expressed in km.</rdfs:comment>
     <!-- http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Accessory -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Accessory">
+        <rdfs:comment>This class represents a collection of accessories to add to the scooter: this collection  includes top case and windshield, but it can be expanded in the future.</rdfs:comment>
         <rdfs:label>Accessory</rdfs:label>
-        <rdfs:label>This class represents a collection of accessories to add to the scooter: this collection  includes top case, windshield, footrests and mirrors.</rdfs:label>
     </owl:Class>
 
 
@@ -531,6 +535,8 @@ This property is expressed in km.</rdfs:comment>
 
     <owl:Class rdf:about="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Diesel">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Fuel"/>
+        <rdfs:comment>This class represents a specific type of fuel.</rdfs:comment>
+        <rdfs:label>Diesel</rdfs:label>
     </owl:Class>
 
 
@@ -539,22 +545,27 @@ This property is expressed in km.</rdfs:comment>
 
     <owl:Class rdf:about="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#ElectricMotor">
         <owl:equivalentClass>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#HasMotorPower"/>
-                <owl:someValuesFrom>
-                    <rdfs:Datatype>
-                        <owl:onDatatype rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
-                        <owl:withRestrictions rdf:parseType="Collection">
-                            <rdf:Description>
-                                <xsd:minInclusive rdf:datatype="http://www.w3.org/2001/XMLSchema#double">2.5</xsd:minInclusive>
-                            </rdf:Description>
-                            <rdf:Description>
-                                <xsd:maxExclusive rdf:datatype="http://www.w3.org/2001/XMLSchema#double">9.0</xsd:maxExclusive>
-                            </rdf:Description>
-                        </owl:withRestrictions>
-                    </rdfs:Datatype>
-                </owl:someValuesFrom>
-            </owl:Restriction>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Engine"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#HasMotorPower"/>
+                        <owl:someValuesFrom>
+                            <rdfs:Datatype>
+                                <owl:onDatatype rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+                                <owl:withRestrictions rdf:parseType="Collection">
+                                    <rdf:Description>
+                                        <xsd:minInclusive rdf:datatype="http://www.w3.org/2001/XMLSchema#double">2.5</xsd:minInclusive>
+                                    </rdf:Description>
+                                    <rdf:Description>
+                                        <xsd:maxExclusive rdf:datatype="http://www.w3.org/2001/XMLSchema#double">9.0</xsd:maxExclusive>
+                                    </rdf:Description>
+                                </owl:withRestrictions>
+                            </rdfs:Datatype>
+                        </owl:someValuesFrom>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
         </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Engine"/>
         <rdfs:comment>This class represents an electric scooter motor: it&apos;s a battery-powered motor, tipically ranging from 2500 W to 9000 W.</rdfs:comment>
@@ -606,16 +617,6 @@ This property is expressed in km.</rdfs:comment>
         <rdfs:comment>This class represents a compact and efficient motor for gasoline engines or powered by an electric motor.
  It tipically features automatic transmission, making it easy to operate for short city rides.</rdfs:comment>
         <rdfs:label>Engine</rdfs:label>
-    </owl:Class>
-
-
-
-    <!-- http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Footrest -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Footrest">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Accessory"/>
-        <rdfs:comment>This class represents a support for the passenger &apos;s feet, usually located on the sides of the scooter, providing comfort and stability during the ride. In Italian it&apos;s called &quot;pedalina&quot;.</rdfs:comment>
-        <rdfs:label>Footrest</rdfs:label>
     </owl:Class>
 
 
@@ -688,6 +689,8 @@ This property is expressed in km.</rdfs:comment>
 
     <owl:Class rdf:about="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Gasoline">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Fuel"/>
+        <rdfs:comment>This class represents an other type of fuel</rdfs:comment>
+        <rdfs:label>Gasoline</rdfs:label>
     </owl:Class>
 
 
@@ -731,14 +734,6 @@ This property is expressed in km.</rdfs:comment>
     <owl:Class rdf:about="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Light">
         <rdfs:comment>This class represents every component of a scooter that illuminates, ensuring visibility and safety during night rides or in low light conditions.</rdfs:comment>
         <rdfs:label>Light</rdfs:label>
-    </owl:Class>
-
-
-
-    <!-- http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Mirror -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Mirror">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Accessory"/>
     </owl:Class>
 
 
@@ -924,6 +919,7 @@ In italian, it&apos;s called &quot;bauletto&quot;.</rdfs:comment>
 
     <owl:Class rdf:about="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Windshield">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Accessory"/>
+        <rdfs:comment>This accessory represents a protective shield mounted at the front, designed to reduce wind resistance and shield the rider from weather elements like wind,rain and debris.</rdfs:comment>
         <rdfs:label>Windshield</rdfs:label>
     </owl:Class>
 
@@ -1052,7 +1048,6 @@ In italian, it&apos;s called &quot;bauletto&quot;.</rdfs:comment>
     <!-- http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Mirror1 -->
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Mirror1">
-        <rdf:type rdf:resource="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Mirror"/>
         <ScooterConfigurator:HasAccessoryDescription>Left mirror</ScooterConfigurator:HasAccessoryDescription>
     </owl:NamedIndividual>
 
@@ -1061,7 +1056,6 @@ In italian, it&apos;s called &quot;bauletto&quot;.</rdfs:comment>
     <!-- http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Mirror2 -->
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Mirror2">
-        <rdf:type rdf:resource="http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#Mirror"/>
         <ScooterConfigurator:HasAccessoryDescription>Right mirror</ScooterConfigurator:HasAccessoryDescription>
     </owl:NamedIndividual>
 

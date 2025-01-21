@@ -1,7 +1,8 @@
-package it.didattica.cs.unicam.progettoloretimgc.controller;
+package it.didattica.cs.unicam.mgc.ScooterConfigurator.controller;
 
-import it.didattica.cs.unicam.progettoloretimgc.model.*;
-import it.didattica.cs.unicam.progettoloretimgc.ontology.QueryService;
+import it.didattica.cs.unicam.mgc.ScooterConfigurator.model.*;
+import it.didattica.cs.unicam.mgc.model.*;
+import it.didattica.cs.unicam.mgc.ScooterConfigurator.ontology.QueryService;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

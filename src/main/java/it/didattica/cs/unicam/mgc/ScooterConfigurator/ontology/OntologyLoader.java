@@ -1,4 +1,4 @@
-package it.didattica.cs.unicam.progettoloretimgc.ontology;
+package it.didattica.cs.unicam.mgc.ScooterConfigurator.ontology;
 
 import org.apache.jena.ontology.OntModel;
 import org.apache.jena.ontology.OntModelSpec;

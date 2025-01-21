@@ -1,6 +1,7 @@
-package it.didattica.cs.unicam.progettoloretimgc.ontology;
+package it.didattica.cs.unicam.mgc.ScooterConfigurator.ontology;
 
-import it.didattica.cs.unicam.progettoloretimgc.model.*;
+import it.didattica.cs.unicam.mgc.ScooterConfigurator.model.*;
+import it.didattica.cs.unicam.mgc.model.*;
 import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
 

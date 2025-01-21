@@ -1,4 +1,4 @@
-package it.didattica.cs.unicam.progettoloretimgc.ontology;
+package it.didattica.cs.unicam.mgc.ScooterConfigurator.ontology;
 
 import org.apache.jena.query.*;
 import org.apache.jena.rdf.model.InfModel;

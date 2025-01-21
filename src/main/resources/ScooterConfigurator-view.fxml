@@ -11,7 +11,7 @@
 
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.control.TextArea?>
-<BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.didattica.cs.unicam.progettoloretimgc.controller.ScooterViewController" >
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.didattica.cs.unicam.mgc.ScooterConfigurator.controller.ScooterViewController" >
     <!-- Main content -->
     <center>
 

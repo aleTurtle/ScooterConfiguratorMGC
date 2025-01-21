@@ -1,6 +1,6 @@
-package it.didattica.cs.unicam.progettoloretimgc;
+package it.didattica.cs.unicam.mgc.ScooterConfigurator;
 
-import it.didattica.cs.unicam.progettoloretimgc.ontology.OntologyLoader;
+import it.didattica.cs.unicam.mgc.ScooterConfigurator.ontology.OntologyLoader;
 import org.apache.jena.ontology.OntModel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

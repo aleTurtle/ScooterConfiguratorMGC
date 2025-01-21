@@ -1,4 +1,4 @@
-package it.didattica.cs.unicam.progettoloretimgc.model;
+package it.didattica.cs.unicam.mgc.ScooterConfigurator.model;
 
 public class Colour {
 
