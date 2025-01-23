@@ -1,7 +1,6 @@
 package it.didattica.cs.unicam.mgc.ScooterConfigurator.ontology;
 
 import it.didattica.cs.unicam.mgc.ScooterConfigurator.model.*;
-import it.didattica.cs.unicam.mgc.model.*;
 import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
 
@@ -11,11 +10,16 @@ import java.util.List;
 public class QueryService {
     private static SPARQLQueryExecutor queryExecutor;
 
+    /**
+     * The QueryService class is responsible for executing SPARQL queries and processing the results
+     * to retrieve various scooter components from the ontology.
+     */
+
     public QueryService(SPARQLQueryExecutor queryExecutor) {
         this.queryExecutor = queryExecutor;
     }
 
-    // Metodo generico per ottenere i componenti
+    // Generic method to get components
     public <T> List<T> getComponents(Scooter scooter, String componentType, String sparqlQuery) {
         List<T> componentList = new ArrayList<>();
         ResultSet results = queryExecutor.executeQuery(sparqlQuery);
@@ -29,7 +33,7 @@ public class QueryService {
         return componentList;
     }
 
-    // Metodo per creare il componente in base al tipo di componente e ai dati della query
+    // Method to create the component based on the component type and query data
     public <T> T createComponent(Scooter scooter, String componentType, QuerySolution solution) {
         T component = null;
         switch (componentType) {
@@ -50,8 +54,7 @@ public class QueryService {
         return component;
     }
 
-
-    // Costruzione dinamica della query
+    // Dynamic query construction
     private String buildQuery(String componentType, String property) {
         String sparqlQuery = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
                 "PREFIX scooter: <http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#>" +
@@ -63,7 +66,7 @@ public class QueryService {
         return sparqlQuery;
     }
 
-    // Metodo specifico per ogni componente
+    // Specific method for each component
     public List<Colour> getColourComponents(Scooter scooter) {
         String Colour = "Colour";
         String HasColourName = "HasColourName";
@@ -99,7 +102,6 @@ public class QueryService {
         return getComponents(scooter, "ScooterPlate", sparqlQuery);
     }
 
-
     public List<Windshield> getWindshieldComponents(Scooter scooter) {
         String Windshield = "Windshield";
         String HasAccessoryDescription  = "HasAccessoryDescription ";
@@ -120,6 +122,7 @@ public class QueryService {
         String sparqlQuery= this.buildQuery(Battery,HasBatteryCapacity );
         return getComponents(scooter, "Battery", sparqlQuery);
     }
+
     public List<ElectricMotor> getElectricMotorComponents(Scooter scooter) {
         String Engine  = "Engine ";
         String HasMotorPower = "HasMotorPower";
@@ -140,6 +143,7 @@ public class QueryService {
         String sparqlQuery= this.buildQuery(Brake ,HasBrakeDescription   );
         return getComponents(scooter, "Brake", sparqlQuery);
     }
+
     public List<Wheel> getWheelComponents(Scooter scooter) {
         String Wheel  = "Wheel";
         String HasWheelDescription ="HasWheelDescription ";

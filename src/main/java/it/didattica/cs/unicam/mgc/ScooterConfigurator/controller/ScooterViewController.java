@@ -1,7 +1,6 @@
 package it.didattica.cs.unicam.mgc.ScooterConfigurator.controller;
 
 import it.didattica.cs.unicam.mgc.ScooterConfigurator.model.*;
-import it.didattica.cs.unicam.mgc.model.*;
 import it.didattica.cs.unicam.mgc.ScooterConfigurator.ontology.QueryService;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;

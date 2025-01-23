@@ -5,7 +5,6 @@ import it.didattica.cs.unicam.mgc.ScooterConfigurator.model.Fuel;
 import it.didattica.cs.unicam.mgc.ScooterConfigurator.model.Light;
 import it.didattica.cs.unicam.mgc.ScooterConfigurator.model.Scooter;
 import it.didattica.cs.unicam.mgc.ScooterConfigurator.ontology.SPARQLQueryExecutor;
-import it.didattica.cs.unicam.mgc.model.*;
 import it.didattica.cs.unicam.mgc.ScooterConfigurator.ontology.QueryService;
 import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;

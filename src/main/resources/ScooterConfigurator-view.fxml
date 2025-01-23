@@ -9,8 +9,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ComboBox?>
 
-<?import javafx.scene.text.Text?>
-<?import javafx.scene.control.TextArea?>
 <BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.didattica.cs.unicam.mgc.ScooterConfigurator.controller.ScooterViewController" >
     <!-- Main content -->
     <center>
@@ -110,15 +108,10 @@
                             <ComboBox fx:id="topcaseComboBox" onAction="#handleSelection" prefWidth="200"/>
                         </VBox>
 
-
-
-
                         <VBox spacing="10">
                             <Label text="Select Windshield:" style="-fx-font-weight: bold; -fx-font-size: 14;"/>
                             <ComboBox fx:id="windshieldComboBox" onAction="#handleSelection" prefWidth="200"/>
                         </VBox>
-
-
 
                     </VBox>
                 </content>
@@ -157,8 +150,12 @@
                             <Insets top="10" right="10" bottom="10" left="10"/>
                         </padding>
                         <Label text="Rider:" style="-fx-font-weight: bold; -fx-font-size: 14;"/>
-                        <Label text="R hgrhyyhr "/>
-                        <Label text="R yyy "/>
+                        <Label text="This table refers to the Rider class, and represents every person who rides a scooter with a corresponding "/>
+                        <Label text=" license. "/>
+                        <Label text="To ride a 50cc scooter, one must be at least 14 years old and hold an AM license. "/>
+                        <Label text="To ride a scooter with an engine size greater than 50cc and up to 125cc, one must be at least 16 years old "/>
+                        <Label text="and hold an A1 license."/>
+                        <Label text="Currently, this class is purely descriptive but can be expanded in the future following further developments."/>
                     </VBox>
                 </content>
             </Tab>

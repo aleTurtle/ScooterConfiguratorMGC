@@ -24,7 +24,7 @@ tasks.withType(JavaCompile) {
 }
 
 application {
-    mainClass = 'it.didattica.cs.unicam.progettoloretimgc.ScooterConfiguratorApplication'
+    mainClass = 'it.didattica.cs.unicam.mgc.ScooterConfigurator.ScooterConfiguratorApplication'
 }
 
 javafx {
@@ -39,9 +39,6 @@ dependencies {
     implementation 'org.apache.jena:jena-tdb:4.8.0'
     implementation 'org.apache.jena:jena-rdfconnection:4.8.0'
 
-    // Dipendenze JavaFX
-    //implementation 'org.openjfx:javafx-controls:20.0.2'
-    //implementation 'org.openjfx:javafx-fxml:20.0.2'
 
     // Openllet con esclusione del modulo in conflitto
     implementation('com.github.galigator.openllet:openllet-core:2.6.4') {
@@ -53,7 +50,6 @@ dependencies {
 
     // Dipendenza per Mockito
     testImplementation 'org.mockito:mockito-core:4.5.1'
-
 
 
     // Dipendenze per test
