@@ -58,7 +58,7 @@ public class QueryServiceTest {
         verify(mockResultSet, times(2)).hasNext();
         verify(mockResultSet).nextSolution();
         verify(mockSolution).getLiteral("property");
-        verify(mockLiteral).getString(); // Verify that getString() was called on the literal
+        verify(mockLiteral).getString(); // Verifies that getString() was called on the literal
     }
 
 
@@ -75,7 +75,7 @@ public void testGetFuelComponents() {
     when(mockResultSet.hasNext()).thenReturn(true, false); // First call returns true, second false
     when(mockResultSet.nextSolution()).thenReturn(mockSolution);
     when(mockSolution.getLiteral("property")).thenReturn(mockLiteral);
-    when(mockLiteral.getString()).thenReturn("Electric"); // Return "Electric" when getString() is called
+    when(mockLiteral.getString()).thenReturn("Electric"); // Returns "Electric" when getString() is called
 
     // Test the method
     List<Fuel> fuels = queryService.getFuelComponents(mockScooter);
@@ -90,7 +90,7 @@ public void testGetFuelComponents() {
     verify(mockResultSet, times(2)).hasNext();
     verify(mockResultSet).nextSolution();
     verify(mockSolution).getLiteral("property");
-    verify(mockLiteral).getString(); // Verify that getString() was called on the literal
+    verify(mockLiteral).getString(); // Verifies that getString() was called on the literal
 }
 
     @Test
@@ -105,7 +105,7 @@ public void testGetFuelComponents() {
         when(mockResultSet.hasNext()).thenReturn(true, false); // First call returns true, second false
         when(mockResultSet.nextSolution()).thenReturn(mockSolution);
         when(mockSolution.getLiteral("property")).thenReturn(mockLiteral);
-        when(mockLiteral.getString()).thenReturn("LED"); // Return "LED" when getString() is called
+        when(mockLiteral.getString()).thenReturn("LED"); // Returns "LED" when getString() is called
 
         // Test the method
         List<Light> lights = queryService.getLightComponents(mockScooter);
@@ -120,7 +120,7 @@ public void testGetFuelComponents() {
         verify(mockResultSet, times(2)).hasNext();
         verify(mockResultSet).nextSolution();
         verify(mockSolution).getLiteral("property");
-        verify(mockLiteral).getString(); // Verify that getString() was called on the literal
+        verify(mockLiteral).getString(); // Verifies that getString() was called on the literal
     }
 
 }

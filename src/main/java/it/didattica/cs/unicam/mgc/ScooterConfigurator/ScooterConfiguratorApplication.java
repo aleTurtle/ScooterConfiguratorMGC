@@ -19,13 +19,13 @@ public class ScooterConfiguratorApplication extends Application {
     @Override
     public void start(Stage stage) {
         try {
-            // Create an instance of the ScooterConfiguratorController
+            //it creates an instance of the ScooterConfiguratorController
             ScooterConfiguratorController controller = new ScooterConfiguratorController();
 
-            // Launch the application by passing the primary stage to the controller
+            // it launches the application by passing the primary stage to the controller
             controller.launch(stage);
         } catch (Exception e) {
-            // Print any exception that occurs during the setup
+            // it prints any exception that occurs during the setup
             e.printStackTrace();
         }
     }

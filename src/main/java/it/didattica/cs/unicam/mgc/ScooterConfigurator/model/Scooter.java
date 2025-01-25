@@ -3,7 +3,7 @@ package it.didattica.cs.unicam.mgc.ScooterConfigurator.model;
 import java.util.List;
 
 public class Scooter {
-
+    // this class represents the most important element for the final configuration
     private String modelName;
     private Colour colour;
     private String color;
@@ -19,12 +19,13 @@ public class Scooter {
 
     public Scooter(String modelName) {
         this.modelName = modelName;
-        this.color = "Default Color"; // Colore di default
-        this.engine = "Electric"; // Motore di default
-        this.wheels = "Medium"; // Ruote di default
-        this.battery = "Standard"; // Batteria di default
-       // this.accessories = "None"; // Accessori di default
+        this.color = "Default Color"; // Default color
+        this.engine = "Electric"; // Default engine
+        this.wheels = "Medium"; // Default wheels
+        this.battery = "Standard"; // Default battery
+        // this.accessories = "None"; // Default accessories
     }
+
 
     public String getName() {
         return modelName;

@@ -1,8 +1,8 @@
 package it.didattica.cs.unicam.mgc.ScooterConfigurator.model;
 
 /**
- * The Colour class represents the color associated with a scooter.
- * It stores information about the scooter and its associated color.
+ * The Colour class represents the colour associated with a scooter.
+ * It stores information about the scooter and its associated colour.
  */
 public class Colour {
 

@@ -21,21 +21,20 @@ public class ScooterViewController {
 
     @FXML
     private ComboBox<String> colorComboBox, fuelComboBox, batteryComboBox, lightComboBox, windshieldComboBox, topcaseComboBox,
-             electricComboBox, ICEComboBox,seatComboBox,scooterPlateComboBox, wheelComboBox,brakeComboBox;
+            electricComboBox, ICEComboBox,seatComboBox,scooterPlateComboBox, wheelComboBox,brakeComboBox;
 
     private QueryService queryService;
-    @FXML
-    private TextArea riderTextArea;
+
 
     private Scooter scooter = new Scooter("MyScooter");
 
-    // Mappa per gestire le configurazioni dinamicamente
+    // Map to manage configurations dynamically
     private final Map<ComboBox<String>, Configurator> configurators = new HashMap<>();
 
     public void setQueryService(QueryService queryService) {
         this.queryService = queryService;
 
-        // Inizializza i dati che dipendono da QueryService
+        // Initialize data that depends on QueryService
         if (queryService != null) {
             initializeConfigurations();
         }
@@ -44,7 +43,7 @@ public class ScooterViewController {
 
     @FXML
     private void initializeConfigurations() {
-        // Configuratori per ogni ComboBox
+        // Configurators for each ComboBox
         configurators.put(colorComboBox, () -> queryService.getColourComponents(scooter).stream()
                 .map(Colour::getColourName).collect(Collectors.toList()));
         configurators.put(fuelComboBox, () -> queryService.getFuelComponents(scooter).stream()
@@ -71,16 +70,15 @@ public class ScooterViewController {
                 .map(Brake::getBrakeDescription).collect(Collectors.toList()));
 
 
-        // Popola le ComboBox
+        // it populates the ComboBoxes
         configurators.forEach((comboBox, configurator) -> populateComboBox(comboBox, configurator));
 
-        // Imposta un'opzione di default
+        // Set a default option
         configurators.keySet().forEach(comboBox -> comboBox.setValue("None"));
     }
 
 
-    //popolo le combo box considerando stringhe tutti i tipi di oggetti nella lsta ma li posso diversificare per
-    // il tipo in questione in base alla box
+    // it populates the combo boxes considering all list items as strings, but diversify them by type according to the box
     private void populateComboBox(ComboBox<String> comboBox, Configurator configurator) {
         List<String> items = configurator.getOptions();
         if (comboBox.getItems().isEmpty()) {
@@ -95,7 +93,7 @@ public class ScooterViewController {
         String selectedValue = comboBox.getValue();
 
         if (selectedValue != null) {
-            // Gestisci la selezione
+            // Handle selection
             String componentName = getComponentName(comboBox);
             updateConfigurationList(componentName, selectedValue);
         } else {
@@ -139,18 +137,18 @@ public class ScooterViewController {
 
 
     private void updateConfigurationList(String componentName, String componentValue) {
-        // Se il valore è "None", rimuovi direttamente il componente dalla lista e termina
+        // If the value is "None", directly remove the component from the list and exit
         if (componentValue.equals("None")) {
             removeComponentFromList(componentName);
             return;
         }
 
-        // Per gli accessori, non rimuovere gli altri componenti
+        // Multiple accessories can exist simultaneously
         if (componentValue.equals("Windshield") || componentName.equals("Topcase")) {
             configurationList.getItems().add(componentName + ": " + componentValue);
             return;
         }
-        // Cerca un'entry esistente e rimuovila
+        // Search for an existing entry and remove it
         String existingEntry = configurationList.getItems().stream()
                 .filter(item -> item.startsWith(componentName + ":"))
                 .findFirst()
@@ -160,17 +158,17 @@ public class ScooterViewController {
             configurationList.getItems().remove(existingEntry);
         }
 
-        // Aggiungi la nuova voce
+        // Add the new entry
         configurationList.getItems().add(componentName + ": " + componentValue);
 
-        // Gestisci il conflitto tra Fuel e Battery
+        // Manage conflict between Fuel and Battery
         if (componentName.equals("Fuel")) {
             removeComponentFromList("Battery");
         } else if (componentName.equals("Battery")) {
             removeComponentFromList("Fuel");
         }
 
-        // Gestisci il conflitto tra Internal Combustion Engine e Electric Motor
+        // it manages conflict between Internal Combustion Engine and Electric Motor
         if (componentName.equals("Internal Combustion Engine")) {
             removeComponentFromList("Electric Motor");
         } else if (componentName.equals("Electric Motor")) {
@@ -204,7 +202,7 @@ public class ScooterViewController {
     private void showFinalConfiguration() {
         this.checkListCompatibility();
 
-        // Mostra la configurazione finale
+        // it shows the final configuration
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Final Configuration");
         alert.setHeaderText(null);
@@ -230,13 +228,13 @@ public class ScooterViewController {
     }
 
     private void checkListCompatibility(){
-        // Flag per rilevare conflitti
+        // Flags to detect conflicts
         boolean hasFuel = false;
         boolean hasElectricMotor = false;
         boolean hasBattery = false;
         boolean hasICE = false;
 
-        // Itera sulla lista delle configurazioni
+        // it iterates over the configuration list
         for (String config : configurationList.getItems()) {
             if (config.startsWith("Fuel:")) {
                 hasFuel = true;
@@ -249,21 +247,21 @@ public class ScooterViewController {
             }
         }
 
-        // Controlla i conflitti
+        // Check conflicts
         if ((hasFuel && hasElectricMotor) || (hasBattery && hasICE)) {
             showAlert("Configuration Conflict",
                     "Conflicting components detected:\n" +
                             "- Fuel and Electric Motor cannot coexist.\n" +
                             "- Battery and Internal Combustion Engine cannot coexist.\n" +
                             "  Please change your configuration");
-            return; // Interrompi la visualizzazione se c'è un conflitto
+            return; // Interrupt display if there is a conflict
         }
 
     }
 
     @FXML
     private void resetList() {
-        // Pulire la ListView per rimuovere tutte le configurazioni
+        // Clear the ListView to remove all configurations
         configurationList.getItems().clear();
     }
 

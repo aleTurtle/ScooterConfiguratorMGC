@@ -12,34 +12,34 @@ public class OntologyLoaderTest {
 
     @BeforeEach
     public void setUp() {
-        // Inizializza l'istanza di OntologyLoader con un file valido
+        // it initializes the OntologyLoader instance with a valid file
         ontologyLoader = new OntologyLoader("ScooterOntology.rdf");
     }
 
     @Test
     public void testLoadOntologyFromFilePath() {
-        // Carica l'ontologia dal file path specificato
+        // it loads the ontology from the specified file path
         OntModel model = ontologyLoader.getOntologyModel();
 
-        // Verifica che il modello non sia nullo
-        assertNotNull(model, "Il modello dell'ontologia non dovrebbe essere nullo");
+        // it verifies that the model is not null
+        assertNotNull(model, "The ontology model should not be null");
 
-        // Verifica che il modello contenga delle dichiarazioni (tripli RDF)
-        assertTrue(model.size() > 0, "Il modello dovrebbe contenere delle dichiarazioni RDF");
+        // it verifies  that the model contains statements (RDF triples)
+        assertTrue(model.size() > 0, "The model should contain RDF statements");
 
-        // Verifica che il modello contenga una specifica classe (ad esempio, scooter:Colour)
+        // it verifies  that the model contains a specific class (e.g., scooter:Colour)
         String namespace = "http://www.semanticweb.org/aless/ontologies/2024/ScooterConfigurator#";
-        assertTrue(model.containsResource(model.createResource(namespace + "Scooter")), "Il modello dovrebbe contenere la risorsa 'Scooter'");
+        assertTrue(model.containsResource(model.createResource(namespace + "Scooter")), "The model should contain the resource 'Scooter'");
     }
 
     @Test
     public void testLoadInvalidOntology() {
-        // Test con un path di ontologia non valido
+        // Test with an invalid ontology path
         ontologyLoader = new OntologyLoader("InvalidOntology.rdf");
         OntModel model = ontologyLoader.getOntologyModel();
 
-        // Verifica che il modello sia nullo o vuoto in caso di file non valido
-        assertNotNull(model, "Il modello dell'ontologia non dovrebbe essere nullo anche se il file non è valido");
-        assertEquals(0, model.size(), "Il modello dovrebbe essere vuoto se il file non è valido");
+        // it verifies that the model is null or empty in case of an invalid file
+        assertNotNull(model, "The ontology model should not be null even if the file is invalid");
+        assertEquals(0, model.size(), "The model should be empty if the file is invalid");
     }
 }
